@@ -1,27 +1,31 @@
 {
-  "name": "clipclopzfront",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.11",
-    "@vue/cli-plugin-eslint": "~4.5.11",
-    "@vue/cli-plugin-router": "~4.5.11",
-    "@vue/cli-service": "~4.5.11",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11"
-  }
+    "name": "clipclopzfront",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve --host 0.0.0.0",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "axios": "^0.24.0",
+        "core-js": "^3.6.5",
+        "scrollreveal": "^4.0.9",
+        "vue": "^2.6.11",
+        "vue-inline-svg": "^2.0.0",
+        "vue-router": "^3.2.0",
+        "vue-scrollto": "^2.20.0"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^5.0.8",
+        "@vue/cli-plugin-eslint": "^5.0.8",
+        "@vue/cli-plugin-router": "^5.0.8",
+        "@vue/cli-service": "^5.0.8",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-vue": "^6.2.2",
+        "sass": "^1.26.5",
+        "sass-loader": "^8.0.2",
+        "vue-template-compiler": "^2.6.11"
+    }
 }

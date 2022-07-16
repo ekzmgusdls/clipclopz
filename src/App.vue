@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div id="nav" ref="nav">
-            <router-link class="logo-container" to="/">
+            <router-link class="logo-container" to="/home">
                 <inline-svg :src="require('./assets/main-logo.svg')"></inline-svg>
             </router-link>
             <div class="nav-list">
@@ -11,9 +11,9 @@
                 <router-link to="/gallery">GALLERY</router-link>
                 <router-link to="/home/#member" @click.native="setNavHeight">MEMBER</router-link>
                 <div class="lang-controller">
-                    <span :class="lang === 'en' ? 'active-lang' : null">En</span> / <span :class="lang === 'ko' ? 'active-lang' : null">Kr</span>
+                    <span :class="lang === 'en' ? 'active-lang' : null" @click="changeLang('en')">En</span>
+                    <span :class="lang === 'ko' ? 'active-lang' : null" @click="changeLang('ko')">Kr</span>
                 </div>
-                <router-link to="/home/#links" @click.native="setNavHeight">LINKS</router-link>
             </div>
         </div>
 
@@ -35,7 +35,7 @@ export default {
         return {
             // BUG 일단은 하드코딩으로 해놓자. 위에서 Props니 Emit이니 해야할 이유가 있나? ... 왜한거지 황당하네
             navHeight: 84,
-            lang: 'ko',
+            lang: 'en',
         };
     },
     methods: {
@@ -44,6 +44,9 @@ export default {
         },
         setNavHeight() {
             this.navheight = this.$refs.nav.clientHeight;
+        },
+        changeLang(lang) {
+            this.lang = lang;
         },
     },
     mounted() {},
@@ -118,6 +121,27 @@ footer {
         gap: 30px;
         font-weight: 800;
         font-size: 14px;
+        align-items: center;
+    }
+}
+
+.lang-controller {
+    display: flex;
+    background: rgb(40, 40, 40);
+    border-radius: 9999px;
+    padding: 5px;
+    span {
+        display: block;
+        padding: 0 10px;
+        border-radius: 9999px;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+    .active-lang {
+        background: #ecb320;
+        color: black;
+        padding: 0 10px;
+        border-radius: 9999px;
     }
 }
 </style>

@@ -70,6 +70,7 @@ export default {
     background: black;
     padding: 30px 0;
     align-items: center;
+    z-index: 999;
     &__img-container {
         max-width: 1200px;
         margin-bottom: 30px;
@@ -89,6 +90,7 @@ export default {
     &__info-container {
         display: flex;
         max-width: 1200px;
+
         width: 100%;
         padding: 0 30px;
         padding-bottom: 60px;
@@ -100,7 +102,7 @@ export default {
         font-weight: 600;
         line-height: 1.1;
         position: relative;
-        max-width: 580px;
+        max-width: 600px;
         flex: 1;
     }
     &__enter {

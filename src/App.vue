@@ -1,5 +1,8 @@
 <template>
     <div id="app">
+        <transition name="fade">
+            <pop-up v-show="isPopup" @popup-exit="popupExit" :lang="lang"></pop-up>
+        </transition>
         <div id="nav" ref="nav">
             <router-link class="logo-container" to="/home">
                 <inline-svg :src="require('./assets/main-logo.svg')"></inline-svg>
@@ -9,37 +12,72 @@
                 <router-link to="/home/#roadmap" @click.native="setNavHeight">ROADMAP</router-link>
                 <router-link to="/home/#team" @click.native="setNavHeight">TEAM</router-link>
                 <router-link to="/gallery">GALLERY</router-link>
-                <router-link to="/home/#member" @click.native="setNavHeight">MEMBER</router-link>
+                <!-- <router-link to="/home/#member" @click.native="setNavHeight">MEMBER</router-link> -->
+                <router-link to="/contest">CONTEST</router-link>
                 <div class="lang-controller">
                     <span :class="lang === 'en' ? 'active-lang' : null" @click="changeLang('en')">En</span>
                     <span :class="lang === 'ko' ? 'active-lang' : null" @click="changeLang('ko')">Kr</span>
                 </div>
             </div>
+            <!-- <div class="mobile-nav-btn" v-if="isMobile" @click="toggleMobileMenu">MENU</div> -->
         </div>
-
+        <!-- <transition name="fade">
+            <mobile-nav v-if="isMobile" v-show="mobileMenuOn" :mobileMenuOn="mobileMenuOn" @toggleMobileMenu="toggleMobileMenu"></mobile-nav>
+        </transition> -->
         <transition name="fade">
-            <router-view @nav-height="getNavHeight" :prop-nav-height="navHeight" :lang="lang" />
+            <router-view @nav-height="getNavHeight" :prop-nav-height="navHeight" :lang="lang" :is-mobile="isMobile" />
         </transition>
         <footer>
             <div class="footer">
-                <div class="footer__email-container">email</div>
-                <div class="footer__main-logo-container">Logo</div>
-                <div class="footer__sns-container">SNS</div>
+                <div class="footer__email-container">
+                    email
+                    <form action="">
+                        <input type="text" />
+                        <button>Submit</button>
+                    </form>
+                </div>
+                <div class="footer__main-logo-container">
+                    <inline-svg :src="require('./assets/main-logo.svg')"></inline-svg>
+                </div>
+                <ul class="footer__sns-container">
+                    <li>
+                        <inline-svg :src="require('./assets/footer/facebook.svg')"></inline-svg>
+                    </li>
+                    <li>
+                        <inline-svg :src="require('./assets/footer/google.svg')"></inline-svg>
+                    </li>
+                    <li>
+                        <inline-svg :src="require('./assets/footer/twitter.svg')"></inline-svg>
+                    </li>
+                    <li>
+                        <inline-svg :src="require('./assets/footer/youtube.svg')"></inline-svg>
+                    </li>
+                </ul>
             </div>
         </footer>
     </div>
 </template>
 <script>
+import PopUp from './components/PopUp.vue';
+// import MobileNav from './components/MobileNav.vue';
 export default {
     data() {
         return {
             // BUG 일단은 하드코딩으로 해놓자. 위에서 Props니 Emit이니 해야할 이유가 있나? ... 왜한거지 황당하네
             navHeight: 84,
             lang: 'en',
+            isPopup: true,
+            isMobile: false,
+            mobileMenuOn: false,
         };
+    },
+    components: {
+        'pop-up': PopUp,
+        // 'mobile-nav': MobileNav,
     },
     methods: {
         getNavHeight(navHeight) {
+            console.log(this.navHeight);
             this.navHeight = navHeight;
         },
         setNavHeight() {
@@ -48,6 +86,25 @@ export default {
         changeLang(lang) {
             this.lang = lang;
         },
+        popupExit(val) {
+            this.isPopup = val;
+        },
+        toggleMobileMenu() {
+            console.log('hi');
+            this.mobileMenuOn = !this.mobileMenuOn;
+        },
+    },
+    beforeMount() {
+        this.isMobile = innerWidth < 800;
+        if (this.isMobile) {
+            this.navHeight = 128;
+        }
+        addEventListener('resize', () => {
+            this.isMobile = innerWidth < 800;
+            if (this.isMobile) {
+                this.navHeight = 128;
+            }
+        });
     },
     mounted() {},
 };
@@ -86,10 +143,29 @@ footer {
 }
 .footer {
     display: flex;
+    position: relative;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px;
-    padding: 30px;
+    padding: 60px 30px;
+    &__main-logo-container {
+        max-width: 150px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        svg {
+            width: 100%;
+        }
+    }
+    &__sns-container {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        svg {
+            height: 15px;
+            width: auto;
+        }
+    }
 }
 
 .fade-enter-active,
@@ -105,7 +181,8 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
+    position: sticky;
+    top: 0;
     width: 100vw;
     background: black;
     z-index: 99;
@@ -142,6 +219,51 @@ footer {
         color: black;
         padding: 0 10px;
         border-radius: 9999px;
+    }
+}
+
+@media all and (max-width: 800px) {
+    #nav {
+        width: 100%;
+        // padding: 5px 15px;
+        padding: 0;
+        flex-wrap: wrap;
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            svg {
+                padding-left: 15px;
+                width: 180px;
+            }
+        }
+        .nav-list {
+            flex-wrap: wrap;
+            gap: 15px;
+            row-gap: 5px;
+            padding: 15px;
+            font-size: 13px;
+            width: 100%;
+            justify-content: flex-start;
+            border-top: 1px solid white;
+            border-bottom: 1px solid white;
+            .lang-controller {
+                position: fixed;
+                top: 20px;
+                right: 15px;
+            }
+        }
+    }
+
+    .footer {
+        padding: 30px 15px;
+        flex-direction: column;
+        &__main-logo-container {
+            position: static;
+            transform: translate(0);
+        }
     }
 }
 </style>

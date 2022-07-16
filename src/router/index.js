@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Intro from '../views/Intro.vue';
 import Gallery from '../views/Gallery.vue';
+import Contest from '../views/Contest.vue';
 Vue.use(VueRouter);
 
 import InlineSvg from 'vue-inline-svg';
@@ -23,6 +24,11 @@ const routes = [
         path: '/gallery',
         name: 'Gallery',
         component: Gallery,
+    },
+    {
+        path: '/contest',
+        name: 'Contest',
+        component: Contest,
     },
 ];
 

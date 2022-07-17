@@ -181,10 +181,10 @@ Online Club Lounge Open (Holders Only)"`,
                             홀더 전용 온라인 클럽라운지 Open`,
                         },
                         {
-                            en: `DRB Token Release & Staking<br/>
+                            en: `CCZ Token Release & Staking<br/>
 Breeding System Open<br/>
  Community Governance System Development`,
-                            ko: `DRB Token 발행 및 스테이킹<br/>
+                            ko: `CCZ Token 발행 및 스테이킹<br/>
                             브리딩 시스템 Open<br/>
                             커뮤니티 거버넌스 시스템 구축`,
                         },
@@ -256,8 +256,8 @@ PETA (People for Ethical Treatment of Animals)`,
                         { en: `Utility`, ko: `유틸리티` },
                         {
                             en: `CCZ Launching Party<br/>
-PFP Exhibition (Location TBD)<br/>
- Merchandise - Limited Edition`,
+PFP Exhibition @ Club1 Hannam (Hana Financial Group) / Lotte World Tower WM Center (Hana Securities)<br/>
+Merchandise - Limited Edition`,
                             ko: `CCZ 런칭파티<br/>
                             PFP Exhbition @ 하나금융그룹 클럽원한남 / 하나증권 롯데월드타워WM센터<br/>
                             한정판 굿즈 제작`,

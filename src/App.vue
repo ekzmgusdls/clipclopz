@@ -131,7 +131,7 @@ export default {
                 },
             };
             let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-            if (ref.email.match(regExp)) {
+            if (ref.email !== null && ref.email.match(regExp)) {
                 ref.mailStatusPopup = true;
 
                 axios({
@@ -147,7 +147,7 @@ export default {
                     }, 2500);
                 });
             } else {
-                alert('이메일 주소가 정확하지 않습니다.');
+                this.lang == 'en' ? alert('Enter the proper email address here.') : alert(`이메일 주소를 정확히 입력해주세요.`);
             }
         },
     },

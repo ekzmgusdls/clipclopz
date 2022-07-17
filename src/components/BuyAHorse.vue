@@ -41,7 +41,7 @@ export default {
                     랜덤하게 생성됩니다. ClipClopz NFT는 회원 전용 혜택들을 제공합니다. 로드맵이 활성화됨에 따라 멤버십 특전들이 차례로 제공될
                     예정입니다.`,
                 en: `ClipClopz is a collection of 10,000 Horse NFTs—unique digital collectibles living on the Solana blockchain. Each
-                    Horse is <strong>a unique</strong> and pragmatically generated NFT. <br /><br />
+                    Horse is a unique and pragmatically generated NFT. <br /><br />
                     ClipClopz NFT will give you access to members-only benefits. Future areas and perks can be unlocked by the community through
                     roadmap activation.`,
             },

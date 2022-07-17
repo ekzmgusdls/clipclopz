@@ -3,7 +3,9 @@
         <div class="pop-up">
             <img :src="lang == 'en' ? require('../assets/popup/contest_poster_en.png') : require('../assets/popup/contest_poster_kr.png')" alt="" />
             <div class="buttons">
-                <div class="move-detail">{{ lang == 'en' ? `Move detail` : `상세 페이지 이동하기` }}</div>
+                <div class="move-detail" @click="exit">
+                    {{ lang == 'en' ? `Move detail` : `상세 페이지 이동하기` }}<router-link to="/contest"></router-link>
+                </div>
                 <div class="exit" @click="exit">{{ lang == 'en' ? `Exit` : `닫기` }}</div>
             </div>
         </div>
@@ -56,7 +58,15 @@ export default {
             font-weight: 700;
             flex: 1;
             text-align: center;
+            position: relative;
             cursor: pointer;
+            a {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 }

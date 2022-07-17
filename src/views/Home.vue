@@ -7,13 +7,11 @@
                 <div class="info-container" v-if="lang === 'ko'">
                     <div class="phase-1">
                         <p>
-                            시작 총성이 울리고 말들이 달려간다.
-                            <br />
+                            시작 총성이 울리고 말들이 달려간다.<br /><br />
                             ‘달리는 삶이 싫었다는 건 아니다. 다른 말들 모두가 원하는 삶을 위해 나도 시작했고 나름 재능도 있어 좋은 커리어로 좋은
                             대우를 받으며 살았다. 이제껏 달리는 나 말고 다른 것들을 하는 나에 대해서는 한번도 생각해본 적이 없어 불안하지만 기대된다.’
-                            <br />
-                            결승선을 통과하는 클립의 얼굴이 어제보다 더 생기 넘쳐 보인다.2021년까지 현역으로 뛰었던 경주마 클립은 2022년도 7월
-                            명예로운 졸업을 하게 되었고 졸업 이후의 삶이 시작되었다.
+                            <br /><br />결승선을 통과하는 클립의 얼굴이 어제보다 더 생기 넘쳐 보인다.<br /><br />
+                            2021년까지 현역으로 뛰었던 경주마 클립은 2022년도 7월 명예로운 졸업을 하게 되었고 졸업 이후의 삶이 시작되었다.
                         </p>
                     </div>
                     <div class="phase-2">
@@ -21,8 +19,10 @@
                         <p>
                             촘촘한 스케줄에 익숙하던 클립은 하루종일 늘어져있거나 맛있는 걸 먹으러 다녀도 남는 시간에 행복한 한편 넘쳐나는 돈과
                             시간으로 목표가 사라진 삶에 공허한 감정 또한 동시에 느낀다. 선베드에 누워있던 클립은 좋은 생각이 난 듯 벌떡 일어난다.
-                            ‘나와 같은 사람들을 만나 교류하며 재밌고 의미있는 일들을 해보는 건 어떨까?’ 클립은 같은 가치관을 가진 친구들을 모았고
-                            입소문을 타고 회원 수가 점점 늘어났다. 그들을 클랍즈라 이름 붙였고 이렇게 클립 클랍즈 클럽이 탄생하게 되었다.
+                            <br /><br />
+                            ‘나와 같은 사람들을 만나 교류하며 재밌고 의미있는 일들을 해보는 건 어떨까?’<br /><br />
+                            클립은 같은 가치관을 가진 친구들을 모았고 입소문을 타고 회원 수가 점점 늘어났다. 그들을 클랍즈라 이름 붙였고 이렇게 클립
+                            클랍즈 클럽이 탄생하게 되었다.
                         </p>
                     </div>
                 </div>
@@ -63,18 +63,25 @@
             <div class="section__content en-line-height">
                 <h2>BUY A HORSE</h2>
                 <p>
-                    ClipClopz is a collection of 10,000 Horse NFTs—unique digital collectibles living on the Solana blockchain. Each Horse is unique
-                    and pragmatically generated NFT.
-                    <br />
+                    {{
+                        lang == 'en'
+                            ? `ClipClopz is a collection of 10,000 Horse NFTs—unique digital collectibles living on the Solana blockchain.
+                    Each Horse is unique and pragmatically generated NFT.
+                    
                     ClipClopz NFT will give you access to members-only benefits. Future areas and perks can be unlocked by the community through
-                    roadmap activation.
+                    roadmap activation.`
+                            : `ClipClopz는 Solana 블록체인에 있는 고유한 10,000개의 Horse NFT 입니다. 각 NFT는 민팅 시 프로그램을 통해
+                    랜덤하게 생성됩니다. ClipClopz NFT는 회원 전용 혜택들을 제공합니다. 로드맵이 활성화됨에 따라 멤버십 특전들이 차례로 제공될
+                    예정입니다.`
+                    }}
                 </p>
                 <img src="../assets/Buy a horse/Clipclopz sample gallery.png" alt="" />
                 <div class="caption">Horse NFT sample images CLIPCLOPZ © 2022</div>
                 <div class="buttons">
-                    <router-link v-if="lang == 'ko'" to="" class="move-to-minting">민팅 페이지로 이동하기</router-link>
-                    <router-link v-if="lang == 'en'" to="" class="move-to-minting">Let's MINT!! </router-link>
-                    <a href="" class="pdf-download move-to-minting">Minting Guide</a>
+                    <a href="http://mint.clipclopz.io" target="_blank" class="move-to-minting">{{
+                        lang == 'en' ? `Let's MINT!!` : `민팅 페이지로 이동하기`
+                    }}</a>
+                    <a href="" class="pdf-download move-to-minting" download="Minting guide">Minting Guide</a>
                 </div>
             </div>
         </section>
@@ -521,9 +528,6 @@ section {
         div {
             flex: 1;
         }
-        .phase-1 {
-            flex: 0.5;
-        }
     }
 }
 
@@ -536,6 +540,7 @@ section {
     }
     p {
         text-align: center;
+        max-width: 800px;
         margin: 0 auto;
         margin-bottom: 100px;
     }
@@ -547,7 +552,7 @@ section {
     .move-to-minting {
         background: #ecb320;
         color: black;
-        padding: 5px 100px;
+        padding: 5px 30px;
         border-radius: 5px;
         display: inline-block;
         position: relative;
@@ -742,6 +747,7 @@ section {
     }
 
     .section-1 {
+        padding-top: 15px;
         .img-container {
             background-size: cover;
             border-radius: 5px;

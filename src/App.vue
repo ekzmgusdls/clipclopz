@@ -48,9 +48,16 @@
                     </li>
                     <li>
                         <inline-svg :src="require('./assets/footer/twitter.svg')"></inline-svg>
+                        <a href="https://twitter.com/clipclopz" target="_blank"></a>
                     </li>
                     <li>
                         <inline-svg :src="require('./assets/footer/youtube.svg')"></inline-svg>
+                    </li>
+                    <li>
+                        <inline-svg :src="require('./assets/footer/discord.svg')"></inline-svg>
+                    </li>
+                    <li>
+                        <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
                     </li>
                 </ul>
             </div>
@@ -160,9 +167,19 @@ footer {
     &__sns-container {
         display: flex;
         align-items: center;
-        gap: 25px;
+        gap: 20px;
+        li {
+            position: relative;
+            a {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
         svg {
-            height: 15px;
+            height: 20px;
             width: auto;
         }
     }
@@ -246,7 +263,7 @@ footer {
             padding: 15px;
             font-size: 13px;
             width: 100%;
-            justify-content: flex-start;
+            justify-content: space-between;
             border-top: 1px solid white;
             border-bottom: 1px solid white;
             .lang-controller {

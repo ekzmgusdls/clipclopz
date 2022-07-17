@@ -45,6 +45,32 @@
                                     <div>상금</div>
                                     <div>선정작품 수</div>
                                 </div>
+                                <div class="table__row rowrow">
+                                    <div class="table-left">
+                                        <div class="table__rowrow">
+                                            <div>대상</div>
+                                            <div>1,000만원</div>
+                                        </div>
+                                        <div class="table__rowrow">
+                                            <div>금상</div>
+                                            <div>500만원</div>
+                                        </div>
+                                        <div class="table__rowrow">
+                                            <div>은상</div>
+                                            <div>300만원</div>
+                                        </div>
+                                        <div class="table__rowrow">
+                                            <div>동상</div>
+                                            <div>200만원</div>
+                                        </div>
+                                    </div>
+                                    <div class="table-right">각 1점</div>
+                                </div>
+                                <div class="table__row">
+                                    <div>입상</div>
+                                    <div>50만원</div>
+                                    <div>10 점</div>
+                                </div>
                             </div>
                         </li>
                         <li>결과 발표 : 0200.28.23 홈페이지 공지</li>
@@ -67,7 +93,10 @@
                     </ul>
                 </article>
                 <div class="buttons">
-                    <div class="button">{{ lang == 'en' ? `Download detail guidlines` : `상세 모집요강 다운로드` }}</div>
+                    <div class="button">
+                        {{ lang == 'en' ? `Download detail guidlines` : `상세 모집요강 다운로드` }}
+                        <a href="contest_detail.pdf" download></a>
+                    </div>
                     <div class="button">
                         {{ lang == 'en' ? `Join` : `공모전 참가하기` }}
                         <a href="https://forms.gle/9CzbN9tiLrU6FK6Z7" target="_blank"></a>
@@ -113,8 +142,43 @@ export default {
             padding: 5px;
 
             .table {
+                color: gray;
                 &__row {
                     display: flex;
+                    border-top: 1px solid gray;
+                    padding: 5px;
+                    padding-left: 40px;
+                    font-size: 0.9em;
+                    .cat {
+                        flex: 0.35;
+                    }
+                    .content {
+                        flex: 1;
+                    }
+                    div {
+                        flex: 1;
+                    }
+                    &.rowrow {
+                        padding: 0;
+                    }
+                }
+                .table-left {
+                    flex: 2;
+                }
+                .table-right {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                &__rowrow {
+                    display: flex;
+                    flex: 1;
+                    padding: 5px 0;
+                    padding-left: 40px;
+                    border-bottom: 1px solid gray;
+                    &:last-of-type {
+                        border-bottom: 0;
+                    }
                 }
             }
         }
@@ -153,12 +217,16 @@ export default {
         text-align: center;
         background: $orange;
         color: black;
-        padding: 5px 10px;
+        padding: 10px 20px;
         border-radius: 5px;
         transition: transform 0.2s;
         cursor: pointer;
         font-weight: 700;
         position: relative;
+        line-height: 1.1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         a {
             position: absolute;
             top: 0;

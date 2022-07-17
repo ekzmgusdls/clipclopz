@@ -88,6 +88,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/scss/variable.scss';
 .intro {
     position: fixed;
     overflow: scroll;
@@ -164,6 +165,27 @@ export default {
     .intro {
         &__enter:hover {
             transform: scale(1.05);
+        }
+    }
+}
+@include mobile {
+    .intro {
+        padding-top: 15px;
+        &__title {
+            font-size: 40px;
+            text-align: center;
+        }
+        &__enter {
+            margin-top: 30px;
+            position: static;
+        }
+        &__img-container {
+            padding: 0 15px;
+            margin-bottom: 0;
+        }
+        &__info-container {
+            flex-direction: column;
+            padding: 15px;
         }
     }
 }

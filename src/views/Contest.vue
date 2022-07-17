@@ -1,41 +1,91 @@
 <template>
     <div class="contest">
         <div class="img-container">
-            <img src="../assets/popup/contest_poster_kr.png" alt="" />
+            <img v-if="lang == 'en'" src="../assets/popup/contest_poster_en.png" alt="" />
+            <img v-else src="../assets/popup/contest_poster_kr.png" alt="" />
         </div>
         <div class="content-container">
             <h2>ClipClopz NFT Art Contest</h2>
-            <section class="summary">
+            <section class="summary summary--en" v-if="lang == 'en'">
+                <article>
+                    <ul>
+                        <li>
+                            <div class="cat">Theme</div>
+                            <div class="content">Visual Art Works inspired by ClipClopz NFT PFP</div>
+                        </li>
+                        <li>
+                            <div class="cat">Date</div>
+                            <div class="content">22.07.18 ~ 22.07.29</div>
+                        </li>
+                        <li>
+                            <div class="cat">Prize</div>
+                            <div class="content">Total: 25,000,000 KRW</div>
+                        </li>
+                        <li>
+                            <div class="cat">Exhibition</div>
+                            <div class="content">
+                                <ul class="sub-list">
+                                    <li>1st Round<br />22.08.08 ~ 22.08.19<br />@Club1 Hannam (Hana Financial Group)</li>
+                                    <li class="no-border-bottom">
+                                        2nd Round<br />22.08.22 ~ 22.08.26<br />@Lotte World Tower WM Center (Hana Securities)
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cat">Detail</div>
+                            <div class="content">
+                                <a href="http://www.clipclopz.io/contest">www.clipclopz.io/contest</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="cat">Contact</div>
+                            <div class="content">
+                                <a href="mailto:contest@clipclopz.io">contest@clipclopz.io</a>
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+                <div class="buttons">
+                    <div class="button">
+                        {{ lang == 'en' ? `Download detail guidlines` : `상세 모집요강 다운로드` }}
+                        <a href="contest_detail.pdf" download></a>
+                    </div>
+                    <div class="button">
+                        {{ lang == 'en' ? `Join` : `공모전 참가하기` }}
+                        <a href="https://forms.gle/9CzbN9tiLrU6FK6Z7" target="_blank"></a>
+                    </div>
+                </div>
+            </section>
+            <section class="summary" v-else>
                 <article>
                     <h4>개요</h4>
                     <ul>
-                        <li>공모 기간 : 2022.07.18 ~ 07.29</li>
+                        <li>공모 기간 : 2022.07.18 ~ 2022.07.29</li>
                         <li>지원 자격 : 시각 미술 분야 아티스트 및 일반인</li>
                         <li>
                             지원 분야 : 전시가 가능한 형태의 시각 미술 작품<br />
                             <div class="table">
                                 <div class="table__row">
                                     <div class="cat">지원 가능 분야</div>
-                                    <div class="content">회화, 판화판화, 조소조소, 조각 등</div>
+                                    <div class="content">회화, 판화판화, 조소, 조각 등</div>
                                 </div>
                                 <div class="table__row">
                                     <div class="cat">지원 제외 분야</div>
-                                    <div class="content">
-                                        디스플레이 장치를 이용한 작품 ex)디지털아트디지털아트, 프로젝션매핑프로젝션매핑, 미디어퍼포먼스 등
-                                    </div>
+                                    <div class="content">디스플레이 장치를 이용한 작품 ex)디지털아트, 프로젝션매핑, 미디어퍼포먼스 등</div>
                                 </div>
                             </div>
                         </li>
                         <li>선정 작품 : 총 15점</li>
                         <li>참가 신청 : 온라인 참가 신청서 작성 (홈페이지 팝업창)</li>
                         <ul class="sub-list">
-                            <li>‘개인 정보수집 및 이용에 관한 사항사항’, ‘유의 사항사항’ 동의 필수</li>
+                            <li>‘개인 정보수집 및 이용에 관한 사항’, ‘유의 사항’ 동의 필수</li>
                             <li>작품 사진 및 소개용 영상 링크 첨부 필수</li>
                         </ul>
                         <li>평가 기준 및 심사 방법</li>
                         <ul class="sub-list">
-                            <li>평가 기준 : ClipClopz project에서 추구하는 이미지와 작가의 창의적 표현 의 조화</li>
-                            <li>심사 방법 : NFT 홀더 온라인 투표 및 심 사위원 투표</li>
+                            <li>평가 기준 : ClipClopz project에서 추구하는 이미지와 작가의 창의적 표현의 조화</li>
+                            <li>심사 방법 : NFT 홀더 온라인 투표 및 심사의원 투표</li>
                         </ul>
                         <li>
                             시상
@@ -73,7 +123,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li>결과 발표 : 0200.28.23 홈페이지 공지</li>
+                        <li>결과 발표 : 2022.08.03 홈페이지 공지</li>
                         <li>문의 : contest@clipclopz.io</li>
                     </ul>
                 </article>
@@ -82,13 +132,13 @@
                     <ul>
                         <li>ClipClopz NFT Art Show 전시</li>
                         <ul>
-                            <li>1차 : 22.08.08 ~ 22.08.19 / 하나금융그룹 클럽원한남 . 서울 용산구 한남대로 98 일신빌딩일신빌딩, 6층</li>
-                            <li>2차 : 22.08.22 ~ 22.08.26 / 하나증권 롯데월드타 워워WM센터 . 서울 송파구 올림픽로 322, 10층</li>
+                            <li>1차 : 22.08.08 ~ 22.08.19 / 하나금융그룹 클럽원한남 . 서울 용산구 한남대로 98 일신빌딩, 6층</li>
+                            <li>2차 : 22.08.22 ~ 22.08.26 / 하나증권 롯데월드타워WM센터 . 서울 송파구 올림픽로 322, 10층</li>
                             <div class="notice">※ 전시 선정 작품은 28.26까지 원본 제출 을 완료 해야 합니다.</div>
                         </ul>
                         <li>ClipClopz NFT Art Auction</li>
                         <ul class="sub-list">
-                            <li>내용 : 전문 경매사의 진행으로진행으로15점의 전시 작품에 대한 경매를 진행 예정</li>
+                            <li>내용 : 전문 경매사의 진행으로 15점의 전시 작품에 대한 경매를 진행 예정</li>
                         </ul>
                     </ul>
                 </article>
@@ -206,6 +256,31 @@ export default {
     }
     article {
         margin-bottom: 30px;
+    }
+    .summary--en {
+        ul {
+            li {
+                list-style: none;
+                display: flex;
+                .cat {
+                    min-width: 100px;
+                }
+                .content {
+                    width: 100%;
+                }
+                .sub-list {
+                    width: 100%;
+                    li {
+                        padding-top: 0;
+                        padding-left: 0;
+                        &.no-border-bottom {
+                            padding-top: 5px;
+                            border-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 .buttons {

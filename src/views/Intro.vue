@@ -1,13 +1,17 @@
 <template>
     <div class="intro">
         <div class="intro__img-container">
-            <div class="intro__img"></div>
+            <div class="intro__img">
+                <img src="../assets/intro-img.png" alt="" />
+            </div>
         </div>
         <div class="intro__info-container">
             <h1 class="intro__title">
                 WELCOME TO<br />
                 CLIPCLOPZ VACATION
-                <router-link class="intro__enter" to="/home">Enter</router-link>
+                <router-link class="intro__enter" to="/home">
+                    {{ lang == 'en' ? `Enter` : `입장하기` }}
+                </router-link>
             </h1>
             <div class="intro__content" v-if="lang == 'ko'">
                 <h3># PHASE 1. 달리기만 하던 삶</h3>
@@ -25,75 +29,11 @@
                 </p>
             </div>
         </div>
-        <footer>
-            <div class="footer">
-                <div class="footer__email-container">
-                    email
-                    <form action="">
-                        <input type="text" />
-                        <button>Submit</button>
-                    </form>
-                </div>
-                <div class="footer__main-logo-container">
-                    <inline-svg :src="require('../assets/main-logo.svg')"></inline-svg>
-                </div>
-                <ul class="footer__sns-container">
-                    <li>
-                        <inline-svg :src="require('../assets/footer/facebook.svg')"></inline-svg>
-                    </li>
-                    <li>
-                        <inline-svg :src="require('../assets/footer/google.svg')"></inline-svg>
-                    </li>
-                    <li>
-                        <inline-svg :src="require('../assets/footer/twitter.svg')"></inline-svg>
-                    </li>
-                    <li>
-                        <inline-svg :src="require('../assets/footer/youtube.svg')"></inline-svg>
-                    </li>
-                </ul>
-            </div>
-        </footer>
     </div>
 </template>
-
-<script>
-export default {
-    props: ['lang'],
-    methods: {
-        adjustIntroImgContainerHeight() {
-            let stHeight = innerHeight;
-            let infoHeight = document.querySelector('.intro__info-container').getBoundingClientRect().height;
-            document.querySelector('.intro__img-container').style.height = stHeight - infoHeight + 'px';
-            addEventListener('resize', this.resizeHandler);
-        },
-
-        resizeHandler(stHeight, infoHeight) {
-            stHeight = innerHeight;
-            infoHeight = document.querySelector('.intro__info-container').getBoundingClientRect().height;
-            document.querySelector('.intro__img-container').style.height = stHeight - infoHeight + 'px';
-        },
-        scrollMeTo(refName) {
-            var element = this.$refs[refName];
-            var top = element.offsetTop;
-            window.scrollTo(0, top);
-        },
-    },
-    mounted() {
-        this.adjustIntroImgContainerHeight();
-    },
-    destroyed() {
-        removeEventListener('resize', this.resizeHandler);
-    },
-};
-</script>
-
 <style lang="scss">
 @import '../assets/scss/variable.scss';
 .intro {
-    position: fixed;
-    overflow: scroll;
-    width: 100vw;
-    height: 100vh;
     top: 0;
     left: 0;
     display: flex;
@@ -109,15 +49,15 @@ export default {
         overflow: hidden;
         width: 100%;
         padding: 0 30px;
+        // aspect-ratio: 16/9;
     }
     &__img {
-        height: 100%;
-        width: 100%;
-        background-image: url('../assets/intro-img.png');
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        border-radius: 10px;
+        display: flex;
+        align-items: flex-start;
+        img {
+            width: 100%;
+            height: auto;
+        }
     }
     &__info-container {
         display: flex;
@@ -185,8 +125,33 @@ export default {
         }
         &__info-container {
             flex-direction: column;
-            padding: 15px;
+            padding: 30px 15px;
         }
     }
 }
 </style>
+
+<script>
+export default {
+    props: ['lang'],
+    methods: {
+        // adjustIntroImgContainerHeight() {
+        //     let stHeight = innerHeight;
+        //     let infoHeight = document.querySelector('.intro__info-container').getBoundingClientRect().height;
+        //     document.querySelector('.intro__img-container').style.height = stHeight - infoHeight + 'px';
+        //     addEventListener('resize', this.resizeHandler);
+        // },
+        // resizeHandler(stHeight, infoHeight) {
+        //     stHeight = innerHeight;
+        //     infoHeight = document.querySelector('.intro__info-container').getBoundingClientRect().height;
+        //     document.querySelector('.intro__img-container').style.height = stHeight - infoHeight + 'px';
+        // },
+    },
+    mounted() {
+        // this.adjustIntroImgContainerHeight();
+    },
+    destroyed() {
+        // removeEventListener('resize', this.resizeHandler);
+    },
+};
+</script>

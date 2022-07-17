@@ -29,30 +29,35 @@
         </transition>
         <footer>
             <div class="footer">
-                <div class="footer__email-container">
-                    email
-                    <form action="">
-                        <input type="text" />
-                        <button>Submit</button>
-                    </form>
-                </div>
-                <div class="footer__main-logo-container">
-                    <inline-svg :src="require('./assets/main-logo.svg')"></inline-svg>
-                </div>
-                <ul class="footer__sns-container">
-                    <li>
-                        <inline-svg :src="require('./assets/footer/facebook.svg')"></inline-svg>
-                    </li>
-                    <li>
-                        <inline-svg :src="require('./assets/footer/google.svg')"></inline-svg>
-                    </li>
+                <ul class="footer__sns-container" v-if="isMobile">
                     <li>
                         <inline-svg :src="require('./assets/footer/twitter.svg')"></inline-svg>
                         <a href="https://twitter.com/clipclopz" target="_blank"></a>
                     </li>
+
                     <li>
-                        <inline-svg :src="require('./assets/footer/youtube.svg')"></inline-svg>
+                        <inline-svg :src="require('./assets/footer/discord.svg')"></inline-svg>
                     </li>
+                    <li>
+                        <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
+                    </li>
+                </ul>
+                <div class="footer__email-container">
+                    E-MAIL
+                    <form action="">
+                        <input type="text" v-model="email" />
+                        <button @click.prevent="sendMail">Submit</button>
+                    </form>
+                </div>
+                <div class="footer__main-logo-container" v-if="!isMobile">
+                    <inline-svg :src="require('./assets/main-logo.svg')"></inline-svg>
+                </div>
+                <ul class="footer__sns-container" v-if="!isMobile">
+                    <li>
+                        <inline-svg :src="require('./assets/footer/twitter.svg')"></inline-svg>
+                        <a href="https://twitter.com/clipclopz" target="_blank"></a>
+                    </li>
+
                     <li>
                         <inline-svg :src="require('./assets/footer/discord.svg')"></inline-svg>
                     </li>
@@ -62,20 +67,35 @@
                 </ul>
             </div>
         </footer>
+        <transition name="fade">
+            <div class="mail-status-popup" v-show="this.mailStatusPopup">
+                <template v-if="!this.mailSendSuccess">Loading...</template>
+                <template v-if="this.mailSendSuccess">
+                    <p
+                        v-html="
+                            lang == 'en' ? `Thank you.<br/>The transmission of mail was successful.` : `감사합니다. <br/>메일 전송이 성공했습니다.`
+                        "
+                    ></p>
+                </template>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
+import axios from 'axios';
 import PopUp from './components/PopUp.vue';
 // import MobileNav from './components/MobileNav.vue';
 export default {
     data() {
         return {
-            // BUG 일단은 하드코딩으로 해놓자. 위에서 Props니 Emit이니 해야할 이유가 있나? ... 왜한거지 황당하네
             navHeight: 84,
             lang: 'en',
-            isPopup: true,
+            isPopup: false,
             isMobile: false,
             mobileMenuOn: false,
+            email: null,
+            mailStatusPopup: false,
+            mailSendSuccess: false,
         };
     },
     components: {
@@ -99,6 +119,36 @@ export default {
         toggleMobileMenu() {
             console.log('hi');
             this.mobileMenuOn = !this.mobileMenuOn;
+        },
+        sendMail() {
+            let ref = this;
+            let data = {
+                service_id: 'service_y9af0ph',
+                template_id: 'template_wcm20ei',
+                user_id: 'YBOFs8m1sNtE-oE4U',
+                template_params: {
+                    message: ref.email,
+                },
+            };
+            let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+            if (ref.email.match(regExp)) {
+                ref.mailStatusPopup = true;
+
+                axios({
+                    method: 'post',
+                    url: 'https://api.emailjs.com/api/v1.0/email/send',
+                    data,
+                }).then(() => {
+                    ref.email = null;
+                    ref.mailSendSuccess = true;
+                    setTimeout(function () {
+                        ref.mailStatusPopup = false;
+                        ref.mailSendSuccess = false;
+                    }, 2500);
+                });
+            } else {
+                alert('이메일 주소가 정확하지 않습니다.');
+            }
         },
     },
     beforeMount() {
@@ -154,6 +204,30 @@ footer {
     justify-content: space-between;
     width: 100%;
     padding: 60px 30px;
+
+    &__email-container {
+        form {
+            display: flex;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+            button,
+            input {
+                font-family: pretendard, Arial, Arial, Helvetica, sans-serif;
+                padding: 5px 10px;
+                border: 0;
+                outline: 0;
+                background: white;
+                border-radius: 0;
+                font-weight: 600;
+            }
+            button {
+                background: rgb(70, 70, 70);
+                color: white;
+                font-weight: 700;
+            }
+        }
+    }
     &__main-logo-container {
         max-width: 150px;
         position: absolute;
@@ -239,7 +313,24 @@ footer {
     }
 }
 
-@media all and (max-width: 800px) {
+.mail-status-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: black;
+    font-size: 15px;
+    font-weight: 700;
+    z-index: 9999;
+    text-align: center;
+    color: #ecb320;
+}
+@include mobile {
     #nav {
         width: 100%;
         // padding: 5px 15px;
@@ -275,11 +366,39 @@ footer {
     }
 
     .footer {
-        padding: 30px 15px;
         flex-direction: column;
+        gap: 15px;
+        padding: 30px 25px;
         &__main-logo-container {
             position: static;
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;
             transform: translate(0);
+            svg {
+                width: 150px;
+            }
+        }
+        &__sns-container {
+            justify-content: center;
+        }
+        &__email-container {
+            form {
+                input {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}
+
+@media (hover: hover) {
+    .footer {
+        &__email-container {
+            button:hover {
+                cursor: pointer;
+            }
         }
     }
 }

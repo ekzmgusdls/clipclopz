@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Intro from '../views/Intro.vue';
 import Gallery from '../views/Gallery.vue';
 import Contest from '../views/Contest.vue';
+
 Vue.use(VueRouter);
 
 import InlineSvg from 'vue-inline-svg';

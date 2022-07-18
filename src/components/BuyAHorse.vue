@@ -22,10 +22,10 @@
                 </template>
             </div>
             <div class="buttons">
-                <a href="http://mint.clipclopz.io" target="_blank" class="move-to-minting">{{
+                <a href="https://mint.clipclopz.io" target="_blank" class="move-to-minting">{{
                     lang == 'en' ? `Let's MINT!!` : `민팅 페이지로 이동하기`
                 }}</a>
-                <a href="" class="pdf-download move-to-minting" download="Minting guide">Minting Guide</a>
+                <a href="Minting_Guide.pdf" class="pdf-download move-to-minting" download="Minting guide">Minting Guide</a>
             </div>
         </div>
     </section>
@@ -74,7 +74,7 @@ export default {
                     `CCZ CLUB All Year Permanent Membership (Horseriding & Glamping) 	<div class='notice'>(*Firsthand Advantage based on # of NFTs)</div>`,
                     `CCZ F&B Members Discount`,
                     `<strong>Collaborative Projects with Various Global Brands (TBA)</strong>`,
-                    `Airdrop - project Donkey / project Foal `,
+                    `Airdrop - project Donkey / project Mule `,
                 ],
             },
         };

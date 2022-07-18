@@ -3,7 +3,7 @@
         <section class="section-1" ref="section-1">
             <a id="phase-2" class="anchor"></a>
             <div class="section__content">
-                <div class="img-container"></div>
+                <img src="../assets/home-img.png" class="img" />
                 <div class="info-container" v-if="lang === 'ko'">
                     <div class="phase-1">
                         <p>
@@ -145,11 +145,10 @@ section {
     .section__content {
         padding-top: 0;
     }
-    .img-container {
+    .img {
         border-radius: 10px;
-        aspect-ratio: 16/9;
-        // background: #ecb320;
-        background-image: url('../assets/home-img.png');
+        width: 100%;
+        height: auto;
         margin-bottom: 50px;
     }
     .info-container {

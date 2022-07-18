@@ -90,7 +90,7 @@ export default {
         return {
             navHeight: 84,
             lang: 'en',
-            isPopup: false,
+            isPopup: true,
             isMobile: false,
             mobileMenuOn: false,
             email: null,

@@ -393,6 +393,10 @@ footer {
     }
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 @media (hover: hover) {
     .footer {
         &__email-container {

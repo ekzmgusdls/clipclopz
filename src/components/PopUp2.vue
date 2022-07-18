@@ -1,9 +1,9 @@
 <template>
     <div class="pop-up" v-if="isThisPopup">
-        <img :src="lang == 'en' ? require('../assets/popup/contest_poster_en.png') : require('../assets/popup/contest_poster_kr.png')" alt="" />
+        <img :src="lang == 'en' ? require('../assets/popup/let_mint.png') : require('../assets/popup/contest_poster_kr.png')" alt="" />
         <div class="buttons">
             <div class="move-detail" @click="moveDetail">
-                {{ lang == 'en' ? `Move detail` : `상세 페이지 이동하기` }}<router-link to="/contest"></router-link>
+                {{ lang == 'en' ? `Move detail` : `상세 페이지 이동하기` }}<router-link to="/home/#buy-a-horse"></router-link>
             </div>
             <div class="exit" @click="exit">{{ lang == 'en' ? `Exit` : `닫기` }}</div>
         </div>

@@ -1,7 +1,10 @@
 <template>
     <div id="app">
         <transition name="fade">
-            <pop-up v-show="isPopup" @popup-exit="popupExit" :lang="lang"></pop-up>
+            <div class="pop-up-container" v-if="isPopup">
+                <pop-up v-show="isPopup" @popup-exit="popupExit" @move-detail="moveDetail" :lang="lang"></pop-up>
+                <pop-up-2 v-show="isPopup" @popup-exit="popupExit" @move-detail="moveDetail" :lang="lang"></pop-up-2>
+            </div>
         </transition>
         <div id="nav" ref="nav">
             <router-link class="logo-container" to="/home">
@@ -60,10 +63,11 @@
 
                     <li>
                         <inline-svg :src="require('./assets/footer/discord.svg')"></inline-svg>
+                        <a href="https://discord.gg/XhSAWC6B" target="_blank"></a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </footer>
@@ -84,6 +88,7 @@
 <script>
 import axios from 'axios';
 import PopUp from './components/PopUp.vue';
+import PopUp2 from './components/PopUp2.vue';
 // import MobileNav from './components/MobileNav.vue';
 export default {
     data() {
@@ -100,11 +105,14 @@ export default {
     },
     components: {
         'pop-up': PopUp,
+        'pop-up-2': PopUp2,
         // 'mobile-nav': MobileNav,
     },
     methods: {
+        moveDetail() {
+            this.isPopup = false;
+        },
         getNavHeight(navHeight) {
-            console.log(this.navHeight);
             this.navHeight = navHeight;
         },
         setNavHeight() {
@@ -113,11 +121,10 @@ export default {
         changeLang(lang) {
             this.lang = lang;
         },
-        popupExit(val) {
-            this.isPopup = val;
+        popupExit() {
+            document.querySelector('.pop-up-container').children.length == 1 ? (this.isPopup = false) : null;
         },
         toggleMobileMenu() {
-            console.log('hi');
             this.mobileMenuOn = !this.mobileMenuOn;
         },
         sendMail() {
@@ -329,6 +336,19 @@ footer {
     z-index: 9999;
     text-align: center;
     color: #ecb320;
+}
+
+.pop-up-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 991;
+    padding: 30px;
+    display: flex;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    gap: 15px;
+    align-items: flex-start;
 }
 @include mobile {
     #nav {

@@ -25,7 +25,7 @@
                 <a href="https://mint.clipclopz.io" target="_blank" class="move-to-minting">{{
                     lang == 'en' ? `Let's MINT!!` : `민팅 페이지로 이동하기`
                 }}</a>
-                <a href="minting_guide_ccz.pdf" class="pdf-download move-to-minting" download="Mingting_Guide">Minting Guide</a>
+                <a href="minting_guide_ccz.pdf" class="pdf-download move-to-minting" download="Mingting_Guide" target="_blank">Minting Guide</a>
             </div>
         </div>
     </section>

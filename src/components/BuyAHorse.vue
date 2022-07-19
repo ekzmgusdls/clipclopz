@@ -25,7 +25,9 @@
                 <a href="https://mint.clipclopz.io" target="_blank" class="move-to-minting">{{
                     lang == 'en' ? `Let's MINT!!` : `민팅 페이지로 이동하기`
                 }}</a>
-                <a href="minting_guide_ccz.pdf" class="pdf-download move-to-minting" download="Mingting_Guide" target="_blank">Minting Guide</a>
+                <a :href="`${this.publicPath}minting_guide_ccz.pdf`" class="pdf-download move-to-minting" download="Mingting_Guide" target="_blank"
+                    >Minting Guide</a
+                >
             </div>
         </div>
     </section>
@@ -36,6 +38,7 @@ export default {
     props: ['lang', 'isMobile'],
     data() {
         return {
+            publicPath: process.env.BASE_URL,
             buyAHorse: {
                 kr: `ClipClopz는 Solana 블록체인에 있는 고유한 10,000개의 Horse NFT 입니다. 각 NFT는 민팅 시 프로그램을 통해
                     랜덤하게 생성됩니다. ClipClopz NFT는 회원 전용 혜택들을 제공합니다. 로드맵이 활성화됨에 따라 멤버십 특전들이 차례로 제공될
@@ -78,6 +81,9 @@ export default {
                 ],
             },
         };
+    },
+    mounted() {
+        console.log(this.publicPath);
     },
 };
 </script>

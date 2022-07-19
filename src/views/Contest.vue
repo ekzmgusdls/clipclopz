@@ -49,7 +49,7 @@
                 <div class="buttons">
                     <div class="button">
                         {{ lang == 'en' ? `Download detail guidlines` : `상세 모집요강 다운로드` }}
-                        <a href="contest_detail.pdf" download></a>
+                        <a :href="`${this.publicPath}contest_detail.pdf`" download="Contest_Detail" target="_blank"></a>
                     </div>
                     <div class="button">
                         {{ lang == 'en' ? `Join` : `공모전 참가하기` }}
@@ -145,7 +145,7 @@
                 <div class="buttons">
                     <div class="button">
                         {{ lang == 'en' ? `Download detail guidlines` : `상세 모집요강 다운로드` }}
-                        <a href="contest_detail.pdf" download></a>
+                        <a :href="`${this.publicPath}contest_detail.pdf`" download="Contest_Detail" target="_blank"></a>
                     </div>
                     <div class="button">
                         {{ lang == 'en' ? `Join` : `공모전 참가하기` }}
@@ -160,6 +160,11 @@
 <script>
 export default {
     props: ['lang'],
+    data() {
+        return {
+            publicPath: process.env.BASE_URL,
+        };
+    },
 };
 </script>
 

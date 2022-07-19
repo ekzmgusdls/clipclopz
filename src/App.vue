@@ -411,6 +411,11 @@ footer {
             }
         }
     }
+
+    .pop-up-container {
+        flex-direction: column;
+        overflow: scroll;
+    }
 }
 
 @media (hover: hover) {

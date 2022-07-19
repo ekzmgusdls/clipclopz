@@ -9,7 +9,7 @@
                     <div class="content" v-html="lang == 'en' ? roadmap.contentEn : roadmap.contentKr"></div>
                 </li>
             </ul>
-            <div class="roadmap-table">
+            <!-- <div class="roadmap-table">
                 <div class="roadmap-table__header">
                     <template v-for="(header, index) in roadmapTable.headers">
                         <div v-html="header" :key="index"></div>
@@ -25,7 +25,7 @@
                         ></div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
 </template>
@@ -73,8 +73,8 @@ Online Club Lounge Open (Holders Only)`,
                     contentEn: `CCZ NFT V2: CCZ Donkey Minting`,
                 },
                 {
-                    contentKr: `CCZ coin 발행 및 스테이킹`,
-                    contentEn: `DRB Token Release & Staking Starts<br/>
+                    contentKr: `CCZ Token 발행 및 스테이킹`,
+                    contentEn: `CCZ Token Release & Staking Starts<br/>
 Breeding System Kickoff<br/>
 Community Governance System Development`,
                 },

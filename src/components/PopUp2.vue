@@ -69,10 +69,4 @@ export default {
         }
     }
 }
-
-@include mobile {
-    .pop-up-container {
-        padding: 20px;
-    }
-}
 </style>

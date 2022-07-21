@@ -11,7 +11,7 @@
                 <inline-svg :src="require('./assets/main-logo.svg')"></inline-svg>
             </router-link>
             <div class="nav-list">
-                <router-link to="/home/#buy-a-horse" @click.native="setNavHeight">BUY A HORESE</router-link>
+                <router-link to="/home/#buy-a-horse" @click.native="setNavHeight">BUY A HORSE</router-link>
                 <router-link to="/home/#roadmap" @click.native="setNavHeight">ROADMAP</router-link>
                 <router-link to="/home/#team" @click.native="setNavHeight">TEAM</router-link>
                 <router-link to="/gallery">GALLERY</router-link>

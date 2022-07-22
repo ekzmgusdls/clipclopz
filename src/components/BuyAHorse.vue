@@ -73,7 +73,7 @@ export default {
                     `Access to MD Shop - Limited Editions`,
                     `Access to PFP IP Utilization`,
                     `Access to other NFT-based Networking Parties`,
-                    `Make Your Own Gatherings within CCPz`,
+                    `Make Your Own Gatherings within CCZ`,
                     `CCZ CLUB All Year Permanent Membership (Horseriding & Glamping) 	<div class='notice'>(*Firsthand Advantage based on # of NFTs)</div>`,
                     `CCZ F&B Members Discount`,
                     `<strong>Collaborative Projects with Various Global Brands (TBA)</strong>`,

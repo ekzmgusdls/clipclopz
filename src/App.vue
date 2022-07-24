@@ -40,9 +40,11 @@
 
                     <li>
                         <inline-svg :src="require('./assets/footer/discord.svg')"></inline-svg>
+                        <a href="https://discord.gg/XhSAWC6B" target="_blank"></a>
                     </li>
                     <li>
                         <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
+                        <a href="https://t.me/+ktAp-Zv1H3UwYmQ1" target="_blank"></a>
                     </li>
                 </ul>
                 <div class="footer__email-container">
@@ -65,9 +67,10 @@
                         <inline-svg :src="require('./assets/footer/discord.svg')"></inline-svg>
                         <a href="https://discord.gg/XhSAWC6B" target="_blank"></a>
                     </li>
-                    <!-- <li>
+                    <li>
                         <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
-                    </li> -->
+                        <a href="https://t.me/+ktAp-Zv1H3UwYmQ1" target="_blank"></a>
+                    </li>
                 </ul>
             </div>
         </footer>

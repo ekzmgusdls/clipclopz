@@ -44,7 +44,7 @@
                     </li>
                     <li>
                         <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
-                        <a href="https://t.me/+ktAp-Zv1H3UwYmQ1" target="_blank"></a>
+                        <a href="https://t.me/clipclopz_official_chat" target="_blank"></a>
                     </li>
                 </ul>
                 <div class="footer__email-container">
@@ -69,7 +69,7 @@
                     </li>
                     <li>
                         <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
-                        <a href="https://t.me/+ktAp-Zv1H3UwYmQ1" target="_blank"></a>
+                        <a href="https://t.me/clipclopz_official_chat" target="_blank"></a>
                     </li>
                 </ul>
             </div>

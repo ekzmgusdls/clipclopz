@@ -1,10 +1,7 @@
 <template>
     <div id="app">
-        <transition name="fade">
-            <div class="pop-up-container" v-if="isPopup">
-                <pop-up v-show="isPopup" @popup-exit="popupExit" @move-detail="moveDetail" :lang="lang"></pop-up>
-                <pop-up-2 v-show="isPopup" @popup-exit="popupExit" @move-detail="moveDetail" :lang="lang"></pop-up-2>
-            </div>
+        <transition name="fade" v-for="popupInfo in popupInfos" :key="popupInfo.popup.ID">
+            <pop-up :lang="lang" :popupInfo="popupInfo"></pop-up>
         </transition>
         <div id="nav" ref="nav">
             <router-link class="logo-container" to="/home">
@@ -58,18 +55,9 @@
                     <inline-svg :src="require('./assets/main-logo.svg')"></inline-svg>
                 </div>
                 <ul class="footer__sns-container" v-if="!isMobile">
-                    <li>
-                        <inline-svg :src="require('./assets/footer/twitter.svg')"></inline-svg>
-                        <a href="https://twitter.com/clipclopz" target="_blank"></a>
-                    </li>
-
-                    <li>
-                        <inline-svg :src="require('./assets/footer/discord.svg')"></inline-svg>
-                        <a href="https://discord.gg/JrfX9pZS" target="_blank"></a>
-                    </li>
-                    <li>
-                        <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
-                        <a href="https://t.me/clipclopz_official_chat" target="_blank"></a>
+                    <li v-for="sns in this.sns" :key="sns.sns_logo.id">
+                        <img :src="sns.sns_logo.sizes.large" alt="" />
+                        <a :href="sns.sns_link"></a>
                     </li>
                 </ul>
             </div>
@@ -91,7 +79,7 @@
 <script>
 import axios from 'axios';
 import PopUp from './components/PopUp.vue';
-import PopUp2 from './components/PopUp2.vue';
+// import PopUp2 from './components/PopUp2.vue';
 // import MobileNav from './components/MobileNav.vue';
 export default {
     data() {
@@ -104,11 +92,13 @@ export default {
             email: null,
             mailStatusPopup: false,
             mailSendSuccess: false,
+            sns: ``,
+            popupInfos: {},
         };
     },
     components: {
         'pop-up': PopUp,
-        'pop-up-2': PopUp2,
+        // 'pop-up-2': PopUp2,
         // 'mobile-nav': MobileNav,
     },
     methods: {
@@ -172,7 +162,23 @@ export default {
             }
         });
     },
-    mounted() {},
+    mounted() {
+        axios({
+            method: 'get',
+            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/94',
+        }).then((res) => {
+            this.sns = res.data.acf.sns;
+            console.log(this.sns);
+        });
+
+        axios({
+            method: 'get',
+            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/7',
+        }).then((res) => {
+            this.popupInfos = res.data.acf.popups;
+            console.log(this.popupInfos);
+        });
+    },
 };
 </script>
 
@@ -261,7 +267,8 @@ footer {
                 height: 100%;
             }
         }
-        svg {
+        svg,
+        img {
             height: 20px;
             width: auto;
         }

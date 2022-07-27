@@ -23,11 +23,14 @@
             <div class="section__content">
                 <h2>PARTNER</h2>
                 <ul class="partner-list">
-                    <inline-svg :src="require('../assets/partners/dexlab.svg')"></inline-svg>
+                    <template v-for="logo in this.partner.logos">
+                        <img :src="logo.sizes.large" alt="" :key="logo.id" />
+                        <!-- <inline-svg :src="require('../assets/partners/dexlab.svg')"></inline-svg>
                     <inline-svg :src="require('../assets/partners/am.svg')"></inline-svg>
                     <inline-svg :src="require('../assets/partners/runup.svg')"></inline-svg>
                     <inline-svg :src="require('../assets/partners/renaissance.svg')"></inline-svg>
-                    <inline-svg :src="require('../assets/partners/atoz.svg')"></inline-svg>
+                    <inline-svg :src="require('../assets/partners/atoz.svg')"></inline-svg> -->
+                    </template>
                 </ul>
             </div>
         </section>
@@ -58,6 +61,9 @@ export default {
                     en: '',
                 },
             },
+            partner: {
+                logos: ``,
+            },
         };
     },
     mounted() {
@@ -76,6 +82,14 @@ export default {
             this.firstSection.leftPart.kr = res.data.acf.left_text_kr;
             this.firstSection.rightPart.en = res.data.acf.right_text_en;
             this.firstSection.rightPart.kr = res.data.acf.right_text_kr;
+        });
+
+        // 파트너 정보 받아오기
+        axios({
+            method: 'get',
+            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/49',
+        }).then((res) => {
+            this.partner.logos = res.data.acf.logos;
         });
     },
     methods: {
@@ -193,6 +207,9 @@ section {
         svg {
             width: calc((100% - 100px) / 3);
         }
+        img {
+            width: calc((100% - 100px) / 3);
+        }
     }
 }
 
@@ -272,6 +289,7 @@ section {
             justify-content: center;
             gap: 30px;
             max-width: 100%;
+            img,
             svg {
                 width: calc((100% - 60px) / 3);
             }

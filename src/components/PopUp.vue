@@ -1,9 +1,10 @@
 <template>
-    <div class="pop-up" v-if="isThisPopup">
-        <img :src="lang == 'en' ? require('../assets/popup/contest_poster_en.png') : require('../assets/popup/contest_poster_kr.png')" alt="" />
+    <div class="pop-up">
+        <img :src="popupInfo.popup.sizes.large" alt="" />
         <div class="buttons">
-            <div class="move-detail" @click="moveDetail">
-                {{ lang == 'en' ? `Move detail` : `상세 페이지 이동하기` }}<router-link to="/contest"></router-link>
+            <div class="move-detail" @click="exit">
+                {{ lang == 'en' ? `Move detail` : `상세 페이지 이동하기` }}
+                <a :href="popupInfo.link.url"></a>
             </div>
             <div class="exit" @click="exit">{{ lang == 'en' ? `Exit` : `닫기` }}</div>
         </div>
@@ -13,19 +14,15 @@
 <script>
 export default {
     name: 'PopUp',
-    props: ['lang'],
+    props: ['lang', 'popup-info'],
     data() {
         return {
-            isThisPopup: true,
+            popupShow: true,
         };
     },
     methods: {
         exit() {
-            this.$emit('popup-exit', false);
-            this.isThisPopup = false;
-        },
-        moveDetail() {
-            this.$emit('move-detail');
+            this.popupShow = false;
         },
     },
 };

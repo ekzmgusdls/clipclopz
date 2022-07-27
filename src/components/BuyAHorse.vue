@@ -45,9 +45,7 @@
                 <a href="https://mint.clipclopz.io" target="_blank" class="move-to-minting">{{
                     lang == 'en' ? `Let's MINT!!` : `민팅 페이지로 이동하기`
                 }}</a>
-                <a :href="`${this.publicPath}minting_guide_ccz.pdf`" class="pdf-download move-to-minting" download="Mingting_Guide" target="_blank"
-                    >Minting Guide</a
-                >
+                <a :href="this.mintingGuidePDF" class="pdf-download move-to-minting" download="Mingting_Guide" target="_blank">Minting Guide</a>
             </div>
         </div>
     </section>
@@ -74,43 +72,10 @@ export default {
                 caption: '',
             },
             holderBenefits: {},
-            holderBenefitList: {
-                kr: [
-                    // `제휴승마장 기승 무료 이용권 (CCZ Club 런칭 전)<div class='notice'>(*NFT 수에 따른 예약우선권 차등 부여)</div>`,
-                    // `CCZ exclusive exhibition 무료 입장권`,
-                    // `오피셜 밋업 무료 입장권`,
-                    // `오피셜 페스티벌 무료 입장권`,
-                    // `오피셜 애프터파티 무료 입장권`,
-                    // `한정판 굿즈 구매권`,
-                    // `IP 활용권`,
-                    // `NFT 특성별 소모임 입장권`,
-                    // `커뮤니티 내 소모임 개설 권한`,
-                    // `CCZ CLUB 평생 회원권 (승마&글램핑)<div class='notice'>(*NFT 수에 따른 예약우선권 차등 부여)</div>`,
-                    // `CCZ F&B 할인권`,
-                    // `<strong>다수의 브랜드와 콜라보 예정</strong>`,
-                    // `신규 프로젝트(Donkey/Mule) 토큰 에어드랍`,
-                ],
-                en: [
-                    `Access to the Affiliated Riding Clubs<div class='notice'>(*Firsthand Advantage based on # of NFTs)</div>`,
-                    `Access to CCZ Exlusive Exhibitions`,
-                    `Access to CCZ Official Meetups`,
-                    `Access to CCZ Festivals`,
-                    `Access to CCZ After Party`,
-                    `Access to MD Shop - Limited Editions`,
-                    `Access to PFP IP Utilization`,
-                    `Access to other NFT-based Networking Parties`,
-                    `Make Your Own Gatherings within CCZ`,
-                    `CCZ CLUB All Year Permanent Membership (Horseriding & Glamping) 	<div class='notice'>(*Firsthand Advantage based on # of NFTs)</div>`,
-                    `CCZ F&B Members Discount`,
-                    `<strong>Collaborative Projects with Various Global Brands (TBA)</strong>`,
-                    `Airdrop - project Donkey / project Mule `,
-                ],
-            },
+            mintingGuidePDF: ``,
         };
     },
     mounted() {
-        console.log(this.publicPath);
-
         // 첫번째 섹션 정보 받아오기
         axios({
             method: 'get',
@@ -122,7 +87,7 @@ export default {
             this.img.caption = res.data.acf.img.caption;
 
             this.holderBenefits = res.data.acf.holder_benefits;
-            console.log(res.data.acf.holder_benefits);
+            this.mintingGuidePDF = res.data.acf.minting_guide.url;
         });
     },
 };

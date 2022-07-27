@@ -5,19 +5,39 @@
             <h2>BUY A HORSE</h2>
             <p :class="lang == 'en' ? 'en-line-height' : null" v-html="lang == 'en' ? buyAHorse.en : buyAHorse.kr"></p>
 
-            <img src="../assets/Buy a horse/Clipclopz sample gallery.png" alt="" />
-            <div class="caption">Horse NFT sample images CLIPCLOPZ © 2022</div>
+            <img :src="this.img.url" alt="" />
+            <div class="caption">{{ this.img.caption }}</div>
             <div class="horder-benefit">
                 <template v-if="lang == 'en'">
                     <h3>Holders Benefit</h3>
                     <ul>
-                        <li v-for="benefitList in holderBenefitList.en" :key="benefitList" v-html="benefitList"></li>
+                        <li v-for="holderBenefit in holderBenefits" :key="holderBenefit.benefit_benefit_en">
+                            <div v-if="!holderBenefit.emphasis">
+                                {{ holderBenefit.holder_benefit_en }}
+                            </div>
+                            <strong v-else>
+                                {{ holderBenefit.holder_benefit_en }}
+                            </strong>
+                            <div class="notice">
+                                {{ holderBenefit.benefit_sub_en }}
+                            </div>
+                        </li>
                     </ul>
                 </template>
                 <template v-else>
                     <h3>홀더 베네핏</h3>
                     <ul>
-                        <li v-for="benefitList in holderBenefitList.kr" :key="benefitList" v-html="benefitList"></li>
+                        <li v-for="holderBenefit in holderBenefits" :key="holderBenefit.benefit_benefit_kr">
+                            <div v-if="!holderBenefit.emphasis">
+                                {{ holderBenefit.benefit_kr }}
+                            </div>
+                            <strong v-else>
+                                {{ holderBenefit.benefit_kr }}
+                            </strong>
+                            <div class="notice">
+                                {{ holderBenefit.benefit_sub_kr }}
+                            </div>
+                        </li>
                     </ul>
                 </template>
             </div>
@@ -34,6 +54,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     props: ['lang', 'isMobile'],
     data() {
@@ -48,21 +69,26 @@ export default {
                     ClipClopz NFT will give you access to members-only benefits. Future areas and perks can be unlocked by the community through
                     roadmap activation.`,
             },
+            img: {
+                url: '',
+                caption: '',
+            },
+            holderBenefits: {},
             holderBenefitList: {
                 kr: [
-                    `제휴승마장 기승 무료 이용권 (CCZ Club 런칭 전)<div class='notice'>(*NFT 수에 따른 예약우선권 차등 부여)</div>`,
-                    `CCZ exclusive exhibition 무료 입장권`,
-                    `오피셜 밋업 무료 입장권`,
-                    `오피셜 페스티벌 무료 입장권`,
-                    `오피셜 애프터파티 무료 입장권`,
-                    `한정판 굿즈 구매권`,
-                    `IP 활용권`,
-                    `NFT 특성별 소모임 입장권`,
-                    `커뮤니티 내 소모임 개설 권한`,
-                    `CCZ CLUB 평생 회원권 (승마&글램핑)<div class='notice'>(*NFT 수에 따른 예약우선권 차등 부여)</div>`,
-                    `CCZ F&B 할인권`,
-                    `<strong>다수의 브랜드와 콜라보 예정</strong>`,
-                    `신규 프로젝트(Donkey/Mule) 토큰 에어드랍`,
+                    // `제휴승마장 기승 무료 이용권 (CCZ Club 런칭 전)<div class='notice'>(*NFT 수에 따른 예약우선권 차등 부여)</div>`,
+                    // `CCZ exclusive exhibition 무료 입장권`,
+                    // `오피셜 밋업 무료 입장권`,
+                    // `오피셜 페스티벌 무료 입장권`,
+                    // `오피셜 애프터파티 무료 입장권`,
+                    // `한정판 굿즈 구매권`,
+                    // `IP 활용권`,
+                    // `NFT 특성별 소모임 입장권`,
+                    // `커뮤니티 내 소모임 개설 권한`,
+                    // `CCZ CLUB 평생 회원권 (승마&글램핑)<div class='notice'>(*NFT 수에 따른 예약우선권 차등 부여)</div>`,
+                    // `CCZ F&B 할인권`,
+                    // `<strong>다수의 브랜드와 콜라보 예정</strong>`,
+                    // `신규 프로젝트(Donkey/Mule) 토큰 에어드랍`,
                 ],
                 en: [
                     `Access to the Affiliated Riding Clubs<div class='notice'>(*Firsthand Advantage based on # of NFTs)</div>`,
@@ -84,6 +110,20 @@ export default {
     },
     mounted() {
         console.log(this.publicPath);
+
+        // 첫번째 섹션 정보 받아오기
+        axios({
+            method: 'get',
+            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/13',
+        }).then((res) => {
+            this.buyAHorse.kr = res.data.acf.text_kr;
+            this.buyAHorse.en = res.data.acf.text_en;
+            this.img.url = res.data.acf.img.sizes.large;
+            this.img.caption = res.data.acf.img.caption;
+
+            this.holderBenefits = res.data.acf.holder_benefits;
+            console.log(res.data.acf.holder_benefits);
+        });
     },
 };
 </script>

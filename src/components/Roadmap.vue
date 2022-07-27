@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     props: ['lang', 'isMobile'],
     data() {
@@ -288,6 +289,14 @@ CSR: Welfare Program for Retired Racing Horses`,
                 ],
             },
         };
+    },
+    mounted() {
+        axios({
+            axiosmethod: 'get',
+            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/15',
+        }).then((res) => {
+            console.log(res);
+        });
     },
 };
 </script>

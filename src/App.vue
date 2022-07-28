@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <transition name="fade" v-for="popupInfo in popupInfos" :key="popupInfo.popup.ID">
-            <pop-up :lang="lang" :popupInfo="popupInfo"></pop-up>
+        <transition name="fade" v-for="(popupInfo, index) in popupInfos" :key="popupInfo.popup.ID">
+            <pop-up :lang="lang" :popupInfo="popupInfo" :index="index"></pop-up>
         </transition>
         <div id="nav" ref="nav">
             <router-link class="logo-container" to="/home">

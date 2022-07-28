@@ -25,7 +25,7 @@
             <mobile-nav v-if="isMobile" v-show="mobileMenuOn" :mobileMenuOn="mobileMenuOn" @toggleMobileMenu="toggleMobileMenu"></mobile-nav>
         </transition> -->
         <transition name="fade">
-            <router-view @nav-height="getNavHeight" :prop-nav-height="navHeight" :lang="lang" :is-mobile="isMobile" />
+            <router-view @nav-height="getNavHeight" :prop-nav-height="navHeight" :lang="lang" :is-mobile="isMobile" :intro="this.intro" />
         </transition>
         <footer>
             <div class="footer">
@@ -94,6 +94,7 @@ export default {
             mailSendSuccess: false,
             sns: ``,
             popupInfos: {},
+            intro: ``,
         };
     },
     components: {
@@ -165,6 +166,15 @@ export default {
                 this.popupInfos = res.data.acf.popups;
             });
         },
+        getIntro() {
+            axios({
+                method: 'get',
+                url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/9',
+            }).then((res) => {
+                this.intro = res.data.acf;
+                console.log(this.intro);
+            });
+        },
     },
     beforeMount() {
         this.isMobile = innerWidth < 800;
@@ -177,6 +187,7 @@ export default {
                 this.navHeight = 128;
             }
         });
+        this.getIntro();
     },
     mounted() {
         this.getFooterSNS();

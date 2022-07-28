@@ -2,7 +2,8 @@
     <div class="intro">
         <div class="intro__img-container">
             <div class="intro__img">
-                <img src="../assets/intro-img.png" alt="" />
+                <!-- <img :src="this.intro.intro_img.sizes.large" alt="" /> -->
+                <img :src="this.intro.intro_img.sizes.large" alt="" />
             </div>
         </div>
         <div class="intro__info-container">
@@ -132,23 +133,36 @@
 </style>
 
 <script>
+import axios from 'axios';
+// TODO 제대로 인트로를 얹어야하는데 왜자꾸 런타임 속도가 저렇게 나오는지 모르겠습니다. 아무래도 이건 다른 방법을 찾아보아야하나봅니다.
 export default {
+    data() {
+        return {
+            intro: {
+                img: ``,
+            },
+        };
+    },
     props: ['lang'],
     methods: {
-        // adjustIntroImgContainerHeight() {
-        //     let stHeight = innerHeight;
-        //     let infoHeight = document.querySelector('.intro__info-container').getBoundingClientRect().height;
-        //     document.querySelector('.intro__img-container').style.height = stHeight - infoHeight + 'px';
-        //     addEventListener('resize', this.resizeHandler);
-        // },
-        // resizeHandler(stHeight, infoHeight) {
-        //     stHeight = innerHeight;
-        //     infoHeight = document.querySelector('.intro__info-container').getBoundingClientRect().height;
-        //     document.querySelector('.intro__img-container').style.height = stHeight - infoHeight + 'px';
-        // },
+        getIntro() {
+            axios({
+                method: 'get',
+                url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/9',
+            }).then((res) => {
+                this.intro.img = res.data.acf.intro.intro_img.sizes.large;
+                // console.log(res.data.acf);
+            });
+        },
     },
     mounted() {
-        // this.adjustIntroImgContainerHeight();
+        // this.getIntro();
+        axios({
+            method: 'get',
+            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/9',
+        }).then((res) => {
+            this.intro = res.data.acf;
+        });
     },
     destroyed() {
         // removeEventListener('resize', this.resizeHandler);

@@ -149,6 +149,22 @@ export default {
                 this.lang == 'en' ? alert('Enter the proper email address here.') : alert(`이메일 주소를 정확히 입력해주세요.`);
             }
         },
+        getFooterSNS() {
+            axios({
+                method: 'get',
+                url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/94',
+            }).then((res) => {
+                this.sns = res.data.acf.sns;
+            });
+        },
+        getPopup() {
+            axios({
+                method: 'get',
+                url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/7',
+            }).then((res) => {
+                this.popupInfos = res.data.acf.popups;
+            });
+        },
     },
     beforeMount() {
         this.isMobile = innerWidth < 800;
@@ -163,21 +179,8 @@ export default {
         });
     },
     mounted() {
-        axios({
-            method: 'get',
-            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/94',
-        }).then((res) => {
-            this.sns = res.data.acf.sns;
-            console.log(this.sns);
-        });
-
-        axios({
-            method: 'get',
-            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/7',
-        }).then((res) => {
-            this.popupInfos = res.data.acf.popups;
-            console.log(this.popupInfos);
-        });
+        this.getFooterSNS();
+        this.getPopup();
     },
 };
 </script>
@@ -256,7 +259,7 @@ footer {
     &__sns-container {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 5px;
         li {
             position: relative;
             a {
@@ -269,7 +272,7 @@ footer {
         }
         svg,
         img {
-            height: 20px;
+            height: 35px;
             width: auto;
         }
     }

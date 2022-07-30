@@ -1,8 +1,8 @@
 <template>
     <div class="contest">
         <div class="img-container">
-            <img v-if="lang == 'en'" src="../assets/popup/contest_poster_en.png" alt="" />
-            <img v-else src="../assets/popup/contest_poster_kr.png" alt="" />
+            <img v-if="lang == 'en'" :src="this.contest.poster_en.sizes.large" alt="" />
+            <img v-else :src="this.contest.poster_kr.sizes.large" alt="" />
         </div>
         <div class="content-container">
             <h2>ClipClopz NFT Art Contest</h2>
@@ -26,9 +26,7 @@
                             <div class="content">
                                 <ul class="sub-list">
                                     <li>1st Round<br />22.08.08 ~ 22.08.19<br />@Club1 Hannam (Hana Financial Group)</li>
-                                    <li class="no-border-bottom">
-                                        2nd Round<br />22.08.22 ~ 22.08.26<br />@Lotte World Tower WM Center (Hana Securities)
-                                    </li>
+                                    <li class="no-border-bottom">2nd Round<br />22.08.22 ~ 22.08.26<br />@Lotte World Tower WM Center (Hana Securities)</li>
                                 </ul>
                             </div>
                         </li>
@@ -49,11 +47,11 @@
                 <div class="buttons">
                     <div class="button">
                         {{ lang == 'en' ? `Download detail guidlines` : `상세 모집요강 다운로드` }}
-                        <a :href="`${this.publicPath}contest_detail.pdf`" download="Contest_Detail" target="_blank"></a>
+                        <a :href="this.contest.pdf.url" download="Contest_Detail" target="_blank"></a>
                     </div>
                     <div class="button">
                         {{ lang == 'en' ? `Join` : `공모전 참가하기` }}
-                        <a href="https://forms.gle/9CzbN9tiLrU6FK6Z7" target="_blank"></a>
+                        <a :href="this.contest.link" target="_blank"></a>
                     </div>
                 </div>
             </section>
@@ -158,12 +156,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     props: ['lang'],
     data() {
         return {
             publicPath: process.env.BASE_URL,
+            contest: ``,
         };
+    },
+    mounted() {
+        // Axios
+        axios({
+            method: 'get',
+            url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/21',
+        }).then((res) => {
+            this.contest = res.data.acf;
+        });
     },
 };
 </script>

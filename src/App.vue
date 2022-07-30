@@ -1,8 +1,10 @@
 <template>
     <div id="app">
-        <transition name="fade" v-for="(popupInfo, index) in popupInfos" :key="popupInfo.popup.ID">
-            <pop-up :lang="lang" :popupInfo="popupInfo" :index="index"></pop-up>
-        </transition>
+        <div class="pop-up-container" v-if="this.isPopupContainer">
+            <transition name="fade" v-for="(popupInfo, index) in popupInfos" :key="popupInfo.popup.ID">
+                <pop-up :lang="lang" :popupInfo="popupInfo" :index="index" @checkPopupContainer="checkPopupContainer" @closePopupContainer="closePopupContainer"></pop-up>
+            </transition>
+        </div>
         <div id="nav" ref="nav">
             <router-link class="logo-container" to="/home">
                 <inline-svg :src="require('./assets/main-logo.svg')"></inline-svg>
@@ -66,11 +68,7 @@
             <div class="mail-status-popup" v-show="this.mailStatusPopup">
                 <template v-if="!this.mailSendSuccess">Loading...</template>
                 <template v-if="this.mailSendSuccess">
-                    <p
-                        v-html="
-                            lang == 'en' ? `Thank you.<br/>The transmission of mail was successful.` : `감사합니다. <br/>메일 전송이 성공했습니다.`
-                        "
-                    ></p>
+                    <p v-html="lang == 'en' ? `Thank you.<br/>The transmission of mail was successful.` : `감사합니다. <br/>메일 전송이 성공했습니다.`"></p>
                 </template>
             </div>
         </transition>
@@ -93,6 +91,7 @@ export default {
             mailStatusPopup: false,
             mailSendSuccess: false,
             sns: ``,
+            isPopupContainer: true,
             popupInfos: {},
             intro: ``,
         };
@@ -172,8 +171,15 @@ export default {
                 url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/9',
             }).then((res) => {
                 this.intro = res.data.acf;
-                console.log(this.intro);
             });
+        },
+        checkPopupContainer() {
+            if (document.querySelectorAll('.pop-up').length <= 1) {
+                this.isPopupContainer = false;
+            }
+        },
+        closePopupContainer() {
+            this.isPopupContainer = false;
         },
     },
     beforeMount() {
@@ -438,6 +444,7 @@ footer {
     .pop-up-container {
         flex-direction: column;
         overflow: scroll;
+        padding: 15px;
     }
 }
 

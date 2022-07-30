@@ -1,19 +1,32 @@
 <template>
-    <vue-draggable-resizable :resizable="false" :class="`pop-up pop-up--${this.index}`" v-if="popupShow">
+    <div :class="`pop-up pop-up--${this.index}`" v-if="popupShow">
         <img :src="this.popupInfo.popup.sizes.large" alt="" />
         <div class="buttons">
-            <div class="move-detail" @click="exit">
+            <div
+                class="move-detail"
+                @click="
+                    exit();
+                    checkPopupContainer();
+                    closePopupContainer();
+                "
+            >
                 {{ this.lang == 'en' ? `Move detail` : `상세 페이지 이동하기` }}
-                <a :href="this.popupInfo.link.url"></a>
+                <router-link :to="this.popupInfo.link"></router-link>
             </div>
-            <div class="exit" @click="exit">{{ lang == 'en' ? `Exit` : `닫기` }}</div>
+            <div
+                class="exit"
+                @click="
+                    exit();
+                    checkPopupContainer();
+                "
+            >
+                {{ lang == 'en' ? `Exit` : `닫기` }}
+            </div>
         </div>
-    </vue-draggable-resizable>
+    </div>
 </template>
 
 <script>
-import VueDraggableResizable from 'vue-draggable-resizable';
-
 export default {
     name: 'PopUp',
     props: ['lang', 'popup-info', 'index'],
@@ -22,23 +35,18 @@ export default {
             popupShow: true,
         };
     },
-    components: {
-        VueDraggableResizable,
-    },
     methods: {
         exit() {
             this.popupShow = false;
         },
+        checkPopupContainer() {
+            this.$emit('checkPopupContainer');
+        },
+        closePopupContainer() {
+            this.$emit('closePopupContainer');
+        },
     },
-    mounted() {
-        if (this.index <= 0) {
-            return;
-        } else {
-            if (innerWidth > 800) {
-                document.querySelector(`.pop-up--${this.index}`).style.left = this.index * 450 + 25 + 'px';
-            }
-        }
-    },
+    mounted() {},
 };
 </script>
 
@@ -52,11 +60,9 @@ export default {
     max-width: 450px;
     width: 100% !important;
     height: auto !important;
-    position: fixed;
     z-index: 999 !important;
     top: 1rem;
     left: 1rem;
-    cursor: move;
     width: 100%;
     img {
         width: 100%;
@@ -88,10 +94,5 @@ export default {
 }
 
 @media all and( max-width: 800px) {
-    .pop-up {
-        width: 95% !important;
-        left: 2.5%;
-        top: 2.5%;
-    }
 }
 </style>

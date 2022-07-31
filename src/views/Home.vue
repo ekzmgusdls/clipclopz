@@ -18,6 +18,15 @@
         <buy-a-horse :lang="lang" :isMobile="isMobile"></buy-a-horse>
         <roadmap :lang="lang" :isMobile="isMobile"></roadmap>
         <team :lang="lang" :isMobile="isMobile"></team>
+        <!-- <section class="member">
+            <a id="member" class="anchor"></a>
+            <h2>MEMBER</h2>
+            <div class="connect-phantom">
+                <h4>Connect phantom</h4>
+                <p>You need to connect your MetaMask wallet before you can mint a token</p>
+                <router-link to="" class="move-to-member">Move to member</router-link>
+            </div>
+        </section> -->
         <section class="partner">
             <a id="partner" class="anchor"></a>
             <div class="section__content">
@@ -153,6 +162,9 @@ section {
     color: black;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     .section__content {
         display: flex;
         flex-direction: column;

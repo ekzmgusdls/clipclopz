@@ -2,8 +2,7 @@
     <div class="intro">
         <div class="intro__img-container">
             <div class="intro__img">
-                <!-- <img :src="" alt="" /> -->
-                {{ this.intro.intro_img.sizes }}
+                <img :src="this.intro.intro_img.sizes.large" alt="" />
             </div>
         </div>
         <div class="intro__info-container">
@@ -14,21 +13,8 @@
                     {{ lang == 'en' ? `Enter` : `입장하기` }}
                 </router-link>
             </h1>
-            <div class="intro__content" v-if="lang == 'ko'">
-                <h3># PHASE 1. 달리기만 하던 삶</h3>
-                <p>
-                    나의 삶은 경쟁이 대부분이었다. 과정과는 상관없이 결과에 대한 성적표를 받으며 희노애락을 느끼고 식사, 운동, 생체리듬까지 오직 경마
-                    경기에 맞춰 쉴 새 없이 달려온 삶이 이 마지막 경기로 끝나나 보다.
-                </p>
-            </div>
-            <div class="intro__content" v-if="lang == 'en'">
-                <h3># PHASE 1. Racing, Relentlessly</h3>
-                <p class="en-line-height">
-                    My life was entirely about ‘the competition' I felt a sense of accomplishment and was completely fueled by outstanding results.
-                    All my daily schedule was built around one single thing, the race. Then, one day, all of a sudden, it felt like it was going to
-                    end on that note, in vain, without anything else.
-                </p>
-            </div>
+            <div class="intro__content" v-if="lang == 'en'" v-html="this.intro.intro_text_en"></div>
+            <div class="intro__content" v-if="lang == 'ko'" v-html="this.intro.intro_text_kr"></div>
         </div>
     </div>
 </template>
@@ -140,7 +126,9 @@ export default {
     },
     props: ['lang', 'intro'],
     methods: {},
-    mounted() {},
+    mounted() {
+        console.log(this.intro);
+    },
     destroyed() {
         // removeEventListener('resize', this.resizeHandler);
     },

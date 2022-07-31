@@ -25,11 +25,6 @@
                 <ul class="partner-list">
                     <template v-for="logo in this.partner.logos">
                         <img :src="logo.sizes.large" alt="" :key="logo.id" />
-                        <!-- <inline-svg :src="require('../assets/partners/dexlab.svg')"></inline-svg>
-                    <inline-svg :src="require('../assets/partners/am.svg')"></inline-svg>
-                    <inline-svg :src="require('../assets/partners/runup.svg')"></inline-svg>
-                    <inline-svg :src="require('../assets/partners/renaissance.svg')"></inline-svg>
-                    <inline-svg :src="require('../assets/partners/atoz.svg')"></inline-svg> -->
                     </template>
                 </ul>
             </div>

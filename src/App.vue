@@ -32,18 +32,9 @@
         <footer>
             <div class="footer">
                 <ul class="footer__sns-container" v-if="isMobile">
-                    <li>
-                        <inline-svg :src="require('./assets/footer/twitter.svg')"></inline-svg>
-                        <a href="https://twitter.com/clipclopz" target="_blank"></a>
-                    </li>
-
-                    <li>
-                        <inline-svg :src="require('./assets/footer/discord.svg')"></inline-svg>
-                        <a href="https://discord.gg/JrfX9pZS" target="_blank"></a>
-                    </li>
-                    <li>
-                        <inline-svg :src="require('./assets/footer/telegram.svg')"></inline-svg>
-                        <a href="https://t.me/clipclopz_official_chat" target="_blank"></a>
+                    <li v-for="sns in this.sns" :key="sns.sns_logo.id">
+                        <img :src="sns.sns_logo.sizes.large" alt="" />
+                        <a :href="sns.sns_link"></a>
                     </li>
                 </ul>
                 <div class="footer__email-container">

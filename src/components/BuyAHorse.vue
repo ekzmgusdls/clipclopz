@@ -42,8 +42,8 @@
                 </template>
             </div>
             <div class="buttons">
-                <a href="https://mint.clipclopz.io" target="_blank" class="move-to-minting">{{ lang == 'en' ? `Let's MINT!!` : `민팅 페이지로 이동하기` }}</a>
-                <a href="https://whitelist-mint.clipclopz.io" target="_blank" class="move-to-minting">{{ lang == 'en' ? `Whitelist Mint` : `Whitelist Mint` }}</a>
+                <a :href="this.letsMintLink" target="_blank" class="move-to-minting">{{ lang == 'en' ? `Let's MINT!!` : `민팅 페이지로 이동하기` }}</a>
+                <a :href="this.whiteListLink" target="_blank" class="move-to-minting">{{ lang == 'en' ? `Whitelist Mint` : `Whitelist Mint` }}</a>
                 <a :href="this.mintingGuidePDF" class="pdf-download move-to-minting" download="Mingting_Guide" target="_blank">Minting Guide</a>
             </div>
         </div>
@@ -58,13 +58,8 @@ export default {
         return {
             publicPath: process.env.BASE_URL,
             buyAHorse: {
-                kr: `ClipClopz는 Solana 블록체인에 있는 고유한 10,000개의 Horse NFT 입니다. 각 NFT는 민팅 시 프로그램을 통해
-                    랜덤하게 생성됩니다. ClipClopz NFT는 회원 전용 혜택들을 제공합니다. 로드맵이 활성화됨에 따라 멤버십 특전들이 차례로 제공될
-                    예정입니다.`,
-                en: `ClipClopz is a collection of 10,000 Horse NFTs—unique digital collectibles living on the Solana blockchain. Each
-                    Horse is a unique and pragmatically generated NFT. <br /><br />
-                    ClipClopz NFT will give you access to members-only benefits. Future areas and perks can be unlocked by the community through
-                    roadmap activation.`,
+                kr: ``,
+                en: ``,
             },
             img: {
                 url: '',
@@ -72,6 +67,8 @@ export default {
             },
             holderBenefits: {},
             mintingGuidePDF: ``,
+            letsMintLink: ``,
+            whiteListLink: ``,
         };
     },
     mounted() {
@@ -80,11 +77,12 @@ export default {
             method: 'get',
             url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/13',
         }).then((res) => {
+            this.letsMintLink = res.data.acf.lets_mint_link;
+            this.whiteListLink = res.data.acf.whitelist_link;
             this.buyAHorse.kr = res.data.acf.text_kr;
             this.buyAHorse.en = res.data.acf.text_en;
             this.img.url = res.data.acf.img.sizes.large;
             this.img.caption = res.data.acf.img.caption;
-
             this.holderBenefits = res.data.acf.holder_benefits;
             this.mintingGuidePDF = res.data.acf.minting_guide.url;
         });

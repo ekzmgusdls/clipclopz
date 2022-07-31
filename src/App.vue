@@ -77,8 +77,6 @@
 <script>
 import axios from 'axios';
 import PopUp from './components/PopUp.vue';
-// import PopUp2 from './components/PopUp2.vue';
-// import MobileNav from './components/MobileNav.vue';
 export default {
     data() {
         return {

@@ -1,6 +1,5 @@
 <template>
     <section class="buy-a-horse">
-        <a id="buy-a-horse" class="anchor"></a>
         <div class="section__content">
             <h2>BUY A HORSE</h2>
             <p :class="lang == 'en' ? 'en-line-height' : null" v-html="lang == 'en' ? buyAHorse.en : buyAHorse.kr"></p>
@@ -11,6 +10,7 @@
                 <template v-if="lang == 'en'">
                     <h3>Holder Benefit</h3>
                     <ul>
+                        <a id="buy-a-horse" class="anchor"></a>
                         <li v-for="holderBenefit in holderBenefits" :key="holderBenefit.benefit_benefit_en">
                             <div v-if="!holderBenefit.emphasis">
                                 {{ holderBenefit.holder_benefit_en }}
@@ -27,6 +27,7 @@
                 <template v-else>
                     <h3>홀더 베네핏</h3>
                     <ul>
+                        <a id="buy-a-horse" class="anchor"></a>
                         <li v-for="holderBenefit in holderBenefits" :key="holderBenefit.benefit_benefit_kr">
                             <div v-if="!holderBenefit.emphasis">
                                 {{ holderBenefit.benefit_kr }}
@@ -43,7 +44,7 @@
             </div>
             <div class="buttons">
                 <a :href="this.letsMintLink" target="_blank" class="move-to-minting">{{ lang == 'en' ? `Let's MINT!!` : `민팅 페이지로 이동하기` }}</a>
-                <a :href="this.whiteListLink" target="_blank" class="move-to-minting">{{ lang == 'en' ? `Whitelist Mint` : `Whitelist Mint` }}</a>
+                <!-- <a :href="this.whiteListLink" target="_blank" class="move-to-minting">{{ lang == 'en' ? `Whitelist Mint` : `Whitelist Mint` }}</a> -->
                 <a :href="this.mintingGuidePDF" class="pdf-download move-to-minting" download="Mingting_Guide" target="_blank">Minting Guide</a>
             </div>
         </div>
@@ -123,6 +124,7 @@ section {
         ul {
             text-align: left;
             border-top: 1px solid rgb(70, 70, 70);
+            position: relative;
             li::v-deep {
                 padding: 5px;
                 border-bottom: 1px solid rgb(70, 70, 70);

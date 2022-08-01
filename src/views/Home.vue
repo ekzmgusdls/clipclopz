@@ -80,7 +80,11 @@ export default {
     },
     mounted() {
         document.querySelectorAll('.anchor').forEach((anchor) => {
-            anchor.style.top = `-${this.propNavHeight}px`;
+            if (anchor.id == 'buy-a-horse') {
+                anchor.style.top = `200px`;
+            } else {
+                anchor.style.top = `-${this.propNavHeight}px`;
+            }
         });
         this.firstSectionPaddingTop();
 

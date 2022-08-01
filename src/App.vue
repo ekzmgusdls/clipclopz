@@ -153,6 +153,10 @@ export default {
                 url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/7',
             }).then((res) => {
                 this.popupInfos = res.data.acf.popups;
+                if (!this.popupInfos.length) {
+                    this.isPopupContainer = false;
+                }
+                console.log(this.popupInfos.length);
             });
         },
         getIntro() {

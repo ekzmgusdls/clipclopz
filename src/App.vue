@@ -14,7 +14,7 @@
                 <router-link to="/home/#roadmap" @click.native="setNavHeight">ROADMAP</router-link>
                 <router-link to="/home/#team" @click.native="setNavHeight">TEAM</router-link>
                 <router-link to="/gallery">GALLERY</router-link>
-                <!-- <router-link to="/home/#member" @click.native="setNavHeight">MEMBER</router-link> -->
+                <router-link to="/home/#member" @click.native="setNavHeight" v-if="this.isMember">MEMBER</router-link>
                 <router-link to="/contest">CONTEST</router-link>
                 <div class="lang-controller">
                     <span :class="lang === 'en' ? 'active-lang' : null" @click="changeLang('en')">En</span>
@@ -27,7 +27,7 @@
             <mobile-nav v-if="isMobile" v-show="mobileMenuOn" :mobileMenuOn="mobileMenuOn" @toggleMobileMenu="toggleMobileMenu"></mobile-nav>
         </transition> -->
         <transition name="fade">
-            <router-view @nav-height="getNavHeight" :prop-nav-height="navHeight" :lang="lang" :is-mobile="isMobile" :intro="this.intro" />
+            <router-view @nav-height="getNavHeight" :prop-nav-height="navHeight" :lang="lang" :is-mobile="isMobile" :intro="this.intro" :is-member="this.isMember" />
         </transition>
         <footer>
             <div class="footer">
@@ -83,6 +83,7 @@ export default {
             isPopupContainer: true,
             popupInfos: {},
             intro: ``,
+            isMember: false,
         };
     },
     components: {
@@ -170,6 +171,14 @@ export default {
         closePopupContainer() {
             this.isPopupContainer = false;
         },
+        getMemberStatus() {
+            axios({
+                method: 'get',
+                url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/156',
+            }).then((res) => {
+                this.isMember = res.data.acf.is_membership;
+            });
+        },
     },
     beforeMount() {
         this.isMobile = innerWidth < 800;
@@ -187,6 +196,7 @@ export default {
     mounted() {
         this.getFooterSNS();
         this.getPopup();
+        this.getMemberStatus();
     },
 };
 </script>

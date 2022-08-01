@@ -18,19 +18,21 @@
         <buy-a-horse :lang="lang" :isMobile="isMobile"></buy-a-horse>
         <roadmap :lang="lang" :isMobile="isMobile"></roadmap>
         <team :lang="lang" :isMobile="isMobile"></team>
-        <section class="member">
+        <section class="member" v-if="this.isMember">
             <a id="member" class="anchor"></a>
-            <h2>CLIPCLOPZ <br />MEMBERSHIP</h2>
-            <p class="summary" v-html="this.membership.summary_en" v-if="this.lang == 'en'"></p>
-            <p class="summary" v-html="this.membership.summary_kr" v-else></p>
-            <div class="connect-phantom">
-                <h4>Connect Wallet</h4>
-                <div class="wallet-content wallet-content--en" v-html="this.membership.wallet_content_en" v-if="this.lang == 'en'"></div>
-                <div class="wallet-content" v-html="this.membership.wallet_content_kr" v-else></div>
-                <a href="" class="move-to-member">Move to membership</a>
+            <div class="section__content">
+                <h2>CLIPCLOPZ <br />MEMBERSHIP</h2>
+                <p class="summary summary--en" v-html="this.membership.summary_en" v-if="this.lang == 'en'"></p>
+                <p class="summary" v-html="this.membership.summary_kr" v-else></p>
+                <div class="connect-phantom">
+                    <h4>Connect Wallet</h4>
+                    <div class="wallet-content wallet-content--en" v-html="this.membership.wallet_content_en" v-if="this.lang == 'en'"></div>
+                    <div class="wallet-content" v-html="this.membership.wallet_content_kr" v-else></div>
+                    <a href="" class="move-to-member">Move to membership</a>
+                </div>
+                <div class="vote vote--en" id="vote" v-if="this.lang == 'en'" v-html="this.membership.vote_en"></div>
+                <div class="vote vote" v-else v-html="this.membership.vote_kr"></div>
             </div>
-            <p class="vote vote--en" v-if="this.lang == 'en'" v-html="this.membership.vote_en"></p>
-            <p class="vote vote" v-else v-html="this.membership.vote_kr"></p>
         </section>
         <section class="partner">
             <a id="partner" class="anchor"></a>
@@ -54,7 +56,7 @@ import Roadmap from '../components/Roadmap';
 import Team from '../components/Team';
 export default {
     components: { BuyAHorse, Roadmap, Team },
-    props: ['propNavHeight', 'lang', 'isMobile'],
+    props: ['propNavHeight', 'lang', 'isMobile', 'isMember'],
     name: 'Home',
     data() {
         return {
@@ -176,7 +178,6 @@ section {
 .member {
     background: #ecb320;
     color: black;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,6 +186,9 @@ section {
     .summary {
         font-size: 18px;
         margin-bottom: 100px;
+        &--en {
+            line-height: 1.2;
+        }
     }
 
     h2 {
@@ -237,10 +241,32 @@ section {
 
     .vote {
         text-align: center;
-        margin-bottom: 100px;
+        color: white;
+
+        text-shadow: 0px 0px 10px white;
+        animation: twinkle 3s infinite;
+
         &--en {
             line-height: 1.3;
         }
+
+        &::v-deep {
+            p {
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+@keyframes twinkle {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1);
     }
 }
 
@@ -345,6 +371,24 @@ section {
             svg {
                 width: calc((100% - 60px) / 3);
             }
+        }
+    }
+
+    .member {
+        .section__content {
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
+        h2 {
+            margin-bottom: 0;
+        }
+        .summary {
+            text-align: center;
+            padding: 0 20px;
+            margin-bottom: 50px;
+        }
+        .connect-phantom {
+            margin-bottom: 50px;
         }
     }
 }

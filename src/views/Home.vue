@@ -18,15 +18,20 @@
         <buy-a-horse :lang="lang" :isMobile="isMobile"></buy-a-horse>
         <roadmap :lang="lang" :isMobile="isMobile"></roadmap>
         <team :lang="lang" :isMobile="isMobile"></team>
-        <!-- <section class="member">
+        <section class="member">
             <a id="member" class="anchor"></a>
-            <h2>MEMBER</h2>
+            <h2>CLIPCLOPZ <br />MEMBERSHIP</h2>
+            <p class="summary" v-html="this.membership.summary_en" v-if="this.lang == 'en'"></p>
+            <p class="summary" v-html="this.membership.summary_kr" v-else></p>
             <div class="connect-phantom">
-                <h4>Connect phantom</h4>
-                <p>You need to connect your MetaMask wallet before you can mint a token</p>
-                <router-link to="" class="move-to-member">Move to member</router-link>
+                <h4>Connect Wallet</h4>
+                <div class="wallet-content wallet-content--en" v-html="this.membership.wallet_content_en" v-if="this.lang == 'en'"></div>
+                <div class="wallet-content" v-html="this.membership.wallet_content_kr" v-else></div>
+                <a href="" class="move-to-member">Move to membership</a>
             </div>
-        </section> -->
+            <p class="vote vote--en" v-if="this.lang == 'en'" v-html="this.membership.vote_en"></p>
+            <p class="vote vote" v-else v-html="this.membership.vote_kr"></p>
+        </section>
         <section class="partner">
             <a id="partner" class="anchor"></a>
             <div class="section__content">
@@ -68,6 +73,7 @@ export default {
             partner: {
                 logos: ``,
             },
+            membership: ``,
         };
     },
     mounted() {
@@ -95,6 +101,7 @@ export default {
         }).then((res) => {
             this.partner.logos = res.data.acf.logos;
         });
+        this.getMembershipInfo();
     },
     methods: {
         firstSectionPaddingTop() {
@@ -108,6 +115,14 @@ export default {
                 }
             });
         },
+        getMembershipInfo() {
+            axios({
+                method: 'get',
+                url: 'https://clipclopz.io/clipclopzback/wp-json/wp/v2/pages/156',
+            }).then((res) => {
+                this.membership = res.data.acf;
+            });
+        },
     },
 };
 </script>
@@ -118,8 +133,9 @@ section {
     border-top: 1px solid white;
     h2 {
         text-align: center;
-        padding-bottom: 100px;
+        margin-bottom: 50px;
     }
+
     .anchor {
         position: relative;
     }
@@ -165,6 +181,16 @@ section {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    .summary {
+        font-size: 18px;
+        margin-bottom: 100px;
+    }
+
+    h2 {
+        line-height: 1.1;
+        margin-bottom: 100px;
+    }
     .section__content {
         display: flex;
         flex-direction: column;
@@ -179,6 +205,8 @@ section {
         box-shadow: 0 0 100px 5px rgba(255, 255, 255, 0.8);
         // animation: woolung infinite s;
         margin: 0 auto;
+        margin-bottom: 100px;
+
         h4 {
             margin-bottom: 30px;
             font-size: 1.2rem;
@@ -195,6 +223,23 @@ section {
             border-radius: 5px;
             padding: 5px 30px;
             color: white;
+        }
+    }
+
+    .wallet-content {
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        &--en {
+            line-height: 1.4;
+        }
+    }
+
+    .vote {
+        text-align: center;
+        margin-bottom: 100px;
+        &--en {
+            line-height: 1.3;
         }
     }
 }

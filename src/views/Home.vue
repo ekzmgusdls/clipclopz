@@ -28,7 +28,7 @@
                     <h4>Connect Wallet</h4>
                     <div class="wallet-content wallet-content--en" v-html="this.membership.wallet_content_en" v-if="this.lang == 'en'"></div>
                     <div class="wallet-content" v-html="this.membership.wallet_content_kr" v-else></div>
-                    <a href="" class="move-to-member">Move to membership</a>
+                    <a :href="this.membership.link" class="move-to-member">Move to membership</a>
                 </div>
                 <div class="vote vote--en" id="vote" v-if="this.lang == 'en'" v-html="this.membership.vote_en"></div>
                 <div class="vote vote" v-else v-html="this.membership.vote_kr"></div>
@@ -79,13 +79,6 @@ export default {
         };
     },
     mounted() {
-        document.querySelectorAll('.anchor').forEach((anchor) => {
-            if (anchor.id == 'buy-a-horse') {
-                anchor.style.top = `200px`;
-            } else {
-                anchor.style.top = `-${this.propNavHeight}px`;
-            }
-        });
         this.firstSectionPaddingTop();
 
         // 첫번째 섹션 정보 받아오기
@@ -108,6 +101,14 @@ export default {
             this.partner.logos = res.data.acf.logos;
         });
         this.getMembershipInfo();
+
+        document.querySelectorAll('.anchor').forEach((anchor) => {
+            if (anchor.id == 'buy-a-horse') {
+                anchor.style.top = `200px`;
+            } else {
+                anchor.style.top = `-${this.propNavHeight}px`;
+            }
+        });
     },
     methods: {
         firstSectionPaddingTop() {

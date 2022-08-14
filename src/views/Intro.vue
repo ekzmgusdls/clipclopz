@@ -126,9 +126,7 @@ export default {
     },
     props: ['lang', 'intro'],
     methods: {},
-    mounted() {
-        console.log(this.intro);
-    },
+    mounted() {},
     destroyed() {
         // removeEventListener('resize', this.resizeHandler);
     },

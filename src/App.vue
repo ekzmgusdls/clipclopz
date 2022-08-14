@@ -16,6 +16,7 @@
                 <router-link to="/gallery">GALLERY</router-link>
                 <router-link to="/home/#member" @click.native="setNavHeight" v-if="this.isMember">MEMBERSHIP</router-link>
                 <router-link to="/contest">CONTEST</router-link>
+                <router-link to="/event">EVENT</router-link>
                 <div class="lang-controller">
                     <span :class="lang === 'en' ? 'active-lang' : null" @click="changeLang('en')">En</span>
                     <span :class="lang === 'ko' ? 'active-lang' : null" @click="changeLang('ko')">Kr</span>
@@ -80,7 +81,8 @@ export default {
             mailStatusPopup: false,
             mailSendSuccess: false,
             sns: ``,
-            isPopupContainer: true,
+            // BUGS 고쳐놓자.
+            isPopupContainer: false,
             popupInfos: {},
             intro: ``,
             isMember: false,
@@ -156,7 +158,6 @@ export default {
                 if (!this.popupInfos.length) {
                     this.isPopupContainer = false;
                 }
-                console.log(this.popupInfos.length);
             });
         },
         getIntro() {

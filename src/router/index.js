@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Intro from '../views/Intro.vue';
 import Gallery from '../views/Gallery.vue';
 import Contest from '../views/Contest.vue';
+import Event from '../views/Event.vue';
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
         path: '/contest',
         name: 'Contest',
         component: Contest,
+    },
+    {
+        path: '/event',
+        name: 'Event',
+        component: Event,
     },
 ];
 

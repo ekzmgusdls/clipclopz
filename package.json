@@ -12,12 +12,14 @@
         "core-js": "^3.6.5",
         "dynamic-marquee": "^2.3.4",
         "scrollreveal": "^4.0.9",
+        "swiper": "^8.3.2",
         "vue": "^2.6.11",
         "vue-draggable-resizable": "^2.3.0",
         "vue-inline-svg": "^2.0.0",
         "vue-plugin-load-script": "^2.1.1",
         "vue-router": "^3.2.0",
-        "vue-scrollto": "^2.20.0"
+        "vue-scrollto": "^2.20.0",
+        "vue-slick": "^1.1.20"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^5.0.8",

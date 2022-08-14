@@ -66,7 +66,7 @@ section {
     background-size: contain;
     background-position: center center;
     max-width: 100%;
-    .roadmap-list::v-deep {
+    :deep(.roadmap-list) {
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
@@ -102,7 +102,7 @@ section {
             border-bottom: 1px solid #ecb320;
             div {
                 flex: 1;
-                ::v-deep .title {
+                :deep(.title) {
                     font-size: 20px;
                     line-height: 1.1;
                     font-weight: 800;

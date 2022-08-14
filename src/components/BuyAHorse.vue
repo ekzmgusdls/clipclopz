@@ -2,7 +2,7 @@
     <section class="buy-a-horse">
         <div class="section__content">
             <h2>BUY A HORSE</h2>
-            <p :class="lang == 'en' ? 'en-line-height' : null" v-html="lang == 'en' ? buyAHorse.en : buyAHorse.kr"></p>
+            <div id="subcontent" :class="lang == 'en' ? 'en-line-height' : null" v-html="lang == 'en' ? buyAHorse.en : buyAHorse.kr"></div>
 
             <img :src="this.img.url" alt="" />
             <div class="caption">{{ this.img.caption }}</div>
@@ -125,7 +125,7 @@ section {
             text-align: left;
             border-top: 1px solid rgb(70, 70, 70);
             position: relative;
-            li::v-deep {
+            :deep(li) {
                 padding: 5px;
                 border-bottom: 1px solid rgb(70, 70, 70);
                 strong {
@@ -147,11 +147,13 @@ section {
         margin: 0 auto;
         margin-bottom: 15px;
     }
-    p::v-deep {
+    #subcontent {
+        margin-bottom: 100px;
+    }
+    :deep(p) {
         text-align: center;
         max-width: 750px;
         margin: 0 auto;
-        margin-bottom: 100px;
         strong {
             color: #ecb320;
             font-style: oblique;
@@ -218,6 +220,9 @@ section {
     }
 
     .buy-a-horse {
+        #subcontent {
+            margin-bottom: 50px;
+        }
         .horder-benefit {
             h3 {
                 margin-top: 60px;

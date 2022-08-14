@@ -164,7 +164,7 @@ section {
         height: auto;
         margin-bottom: 50px;
     }
-    .info-container::v-deep {
+    :deep(.info-container) {
         padding: 0 30px;
         display: flex;
         gap: 60px;
@@ -255,10 +255,8 @@ section {
             line-height: 1.3;
         }
 
-        &::v-deep {
-            p {
-                font-size: 18px;
-            }
+        :deep(p) {
+            font-size: 18px;
         }
     }
 }

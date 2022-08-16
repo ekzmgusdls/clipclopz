@@ -10,7 +10,7 @@
                     closePopupContainer();
                 "
             >
-                {{ this.lang == 'en' ? `Move detail` : `상세 페이지 이동하기` }}
+                {{ this.lang == 'en' ? `Move to detail` : `상세 페이지 이동하기` }}
                 <router-link :to="this.popupInfo.link"></router-link>
             </div>
             <div
@@ -93,6 +93,6 @@ export default {
     }
 }
 
-@media all and( max-width: 800px) {
+@media all and (max-width: 800px) {
 }
 </style>

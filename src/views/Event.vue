@@ -7,8 +7,7 @@
             <video muted autoplay playsinline controls loop>
                 <source :src="this.event.video.url" />
             </video>
-            <!-- <swiper></swiper> -->
-            <img v-for="(picture, index) in this.event.pictures" :key="index" :src="picture.sizes.large" alt="" />
+            <img v-for="(img, index) in this.event.pictures" :key="index" :src="img.sizes.large" alt="" />
         </div>
         <div class="content-container">
             <section class="summary summary--en" v-if="lang == 'en'">
@@ -25,11 +24,9 @@
 
 <script>
 import axios from 'axios';
-// import Swiper from '../components/Swiper';
 
 export default {
     props: ['lang'],
-    // components: { Swiper },
     data() {
         return {
             event: ``,
@@ -53,7 +50,7 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
     padding: 30px;
-    padding-bottom: 100px;
+    padding-bottom: 200px;
     display: flex;
     flex-wrap: wrap;
     gap: 60px;
@@ -70,15 +67,21 @@ export default {
         margin-bottom: 60px;
     }
     .img-container {
-        width: calc((100% - 60px) / 2);
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 30px;
         img {
-            width: 50%;
+            width: calc((100% - 1rem) / 2);
+        }
+        video {
+            width: 100%;
+            margin-bottom: 30px;
         }
     }
     .content-container {
-        width: calc((100% - 60px) / 2);
+        width: 100%;
     }
     ul {
         li {
@@ -223,6 +226,9 @@ export default {
         gap: 15px;
         .img-container,
         .content-container {
+            width: 100%;
+        }
+        .sub-copy {
             width: 100%;
         }
     }

@@ -15,7 +15,7 @@
                 <router-link to="/home/#team" @click.native="setNavHeight">TEAM</router-link>
                 <router-link to="/gallery">GALLERY</router-link>
                 <router-link to="/home/#member" @click.native="setNavHeight" v-if="this.isMember">MEMBERSHIP</router-link>
-                <router-link to="/contest">CONTEST</router-link>
+                <!-- <router-link to="/contest">CONTEST</router-link> -->
                 <router-link to="/event">EVENT</router-link>
                 <div class="lang-controller">
                     <span :class="lang === 'en' ? 'active-lang' : null" @click="changeLang('en')">En</span>
